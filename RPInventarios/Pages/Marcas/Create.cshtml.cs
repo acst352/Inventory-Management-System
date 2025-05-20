@@ -1,44 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using RPInventarios.Data;
 using RPInventarios.Models;
 
-namespace RPInventarios.Pages.Marcas
+namespace RPInventarios.Pages.Marcas;
+
+public class CreateModel : PageModel
 {
-    public class CreateModel : PageModel
+    private readonly InventariosContext _context;
+
+    public CreateModel(InventariosContext context)
     {
-        private readonly RPInventarios.Data.InventariosContext _context;
+        _context = context;
+    }
 
-        public CreateModel(RPInventarios.Data.InventariosContext context)
-        {
-            _context = context;
-        }
+    public IActionResult OnGet()
+    {
+        return Page();
+    }
 
-        public IActionResult OnGet()
+    [BindProperty]
+    public Marca Marca { get; set; } = default!;
+
+    // For more information, see https://aka.ms/RazorPagesCRUD.
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid)
         {
             return Page();
         }
 
-        [BindProperty]
-        public Marca Marca { get; set; } = default!;
+        _context.Marcas.Add(Marca);
+        await _context.SaveChangesAsync();
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.Marcas.Add(Marca);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
     }
 }
