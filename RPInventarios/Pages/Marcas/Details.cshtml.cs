@@ -28,7 +28,7 @@ namespace RPInventarios.Pages.Marcas
                 return NotFound();
             }
 
-            var marca = await _context.Marca.FirstOrDefaultAsync(m => m.Id == id);
+            var marca = await _context.Marcas.FirstOrDefaultAsync(m => m.Id == id);
 
             if (marca is not null)
             {

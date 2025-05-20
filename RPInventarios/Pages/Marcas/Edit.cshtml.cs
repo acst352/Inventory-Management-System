@@ -30,7 +30,7 @@ namespace RPInventarios.Pages.Marcas
                 return NotFound();
             }
 
-            var marca =  await _context.Marca.FirstOrDefaultAsync(m => m.Id == id);
+            var marca =  await _context.Marcas.FirstOrDefaultAsync(m => m.Id == id);
             if (marca == null)
             {
                 return NotFound();
@@ -71,7 +71,7 @@ namespace RPInventarios.Pages.Marcas
 
         private bool MarcaExists(int id)
         {
-            return _context.Marca.Any(e => e.Id == id);
+            return _context.Marcas.Any(e => e.Id == id);
         }
     }
 }

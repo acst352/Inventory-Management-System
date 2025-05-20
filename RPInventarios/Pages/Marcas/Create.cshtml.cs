@@ -35,7 +35,7 @@ namespace RPInventarios.Pages.Marcas
                 return Page();
             }
 
-            _context.Marca.Add(Marca);
+            _context.Marcas.Add(Marca);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

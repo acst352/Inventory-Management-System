@@ -29,7 +29,7 @@ namespace RPInventarios.Pages.Marcas
                 return NotFound();
             }
 
-            var marca = await _context.Marca.FirstOrDefaultAsync(m => m.Id == id);
+            var marca = await _context.Marcas.FirstOrDefaultAsync(m => m.Id == id);
 
             if (marca is not null)
             {
@@ -48,11 +48,11 @@ namespace RPInventarios.Pages.Marcas
                 return NotFound();
             }
 
-            var marca = await _context.Marca.FindAsync(id);
+            var marca = await _context.Marcas.FindAsync(id);
             if (marca != null)
             {
                 Marca = marca;
-                _context.Marca.Remove(Marca);
+                _context.Marcas.Remove(Marca);
                 await _context.SaveChangesAsync();
             }
 

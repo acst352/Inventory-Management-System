@@ -23,7 +23,7 @@ namespace RPInventarios.Pages.Marcas
 
         public async Task OnGetAsync()
         {
-            Marca = await _context.Marca.ToListAsync();
+            Marca = await _context.Marcas.ToListAsync();
         }
     }
 }
