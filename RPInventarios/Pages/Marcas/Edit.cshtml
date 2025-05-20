@@ -2,35 +2,36 @@
 @model RPInventarios.Pages.Marcas.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+	ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Marca</h4>
+<h4>@ViewData["Title"]</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Marca.Id" />
-            <div class="form-group">
-                
-                <label asp-for="Marca.Nombre" class="control-label"></label>
-                <input asp-for="Marca.Nombre" class="form-control" />
-                <span asp-validation-for="Marca.Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+	<div class="col-md-4">
+		<form method="post">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<input type="hidden" asp-for="Marca.Id" />
+			<div class="form-group">
 
-<div>
-    <a asp-page="./Index">Back to List</a>
+				<label asp-for="Marca.Nombre" class="control-label"></label>
+				<input asp-for="Marca.Nombre" class="form-control" />
+				<span asp-validation-for="Marca.Nombre" class="text-danger"></span>
+			</div>
+			<div class="form-group mt-3">
+				<button type="submit" class="btn btn-primary me-3">
+					<i class="fa-solid fa-floppy-disk"></i>&nbsp;Actualizar
+				</button>
+				<a asp-page="./Index" class="btn btn-secondary">
+					<i class="fa-solid fa-circle-arrow-left"></i>&nbsp;Regresar
+				</a>
+			</div>
+		</form>
+	</div>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
 }
