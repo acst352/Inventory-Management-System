@@ -18,6 +18,7 @@ namespace RPInventarios.Data
         public DbSet<Departamento> Departamentos { get; set; } = default!;
         public DbSet<Producto> Productos { get; set; } = default!;
 
+        // Mapeo del nombre de clases con el nombre en la tabla de la BD
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Marca>().ToTable("Marca");
