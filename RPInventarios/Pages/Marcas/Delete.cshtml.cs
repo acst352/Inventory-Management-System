@@ -37,7 +37,7 @@ public class DeleteModel : PageModel
 
             return Page();
         }
-
+        _servicioNotificacion.Warning($"No se encontró la marca con ID {id}");
         return NotFound();
     }
 
