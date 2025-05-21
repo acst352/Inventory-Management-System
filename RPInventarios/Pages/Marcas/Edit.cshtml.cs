@@ -50,6 +50,12 @@ public class EditModel : PageModel
             await _context.SaveChangesAsync();
         }
         catch (DbUpdateConcurrencyException)
+        // DbUpdateConcurrencyException se utiliza para manejar conflictos de concurrencia.
+        // Por ejemplo, si dos usuarios intentan modificar o eliminar el mismo registro al mismo tiempo:
+        // Usuario 1 elimina el registro, Usuario 2 intenta guardar cambios sobre ese mismo registro.
+        // Entity Framework detecta el conflicto y lanza esta excepción.
+        // Si el registro ya no existe, se retorna NotFound(); si existe pero fue modificado, se relanza la excepción.
+
         {
             if (!MarcaExists(Marca.Id))
             {
@@ -58,6 +64,11 @@ public class EditModel : PageModel
             else
             {
                 throw;
+                // Después de capturar una excepción en un bloque catch, se vuelve a lanzar la misma excepción
+                // para que sea manejada por otro bloque de manejo de excepciones más arriba en la pila de llamadas. 
+                // Si la excepción no puede ser resuelta localmente, se relanza para que otro manejador de excepciones 
+                // la procese o para que el sistema la registre como un error.
+                // Permite no 'ocultar' errores graves y mantener el flujo de control adecuado. 
             }
         }
 
