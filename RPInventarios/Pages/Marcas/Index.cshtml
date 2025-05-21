@@ -44,9 +44,9 @@
 @if (Model.TotalPaginas > 1)
 {
     <nav aria-label="Paginación">
-        <ul class="pagination justify-content-center">
+        <ul class="pagination justify-content-center my-4">
             <li class="page-item @(Model.Pagina <= 1 ? "disabled" : "")">
-                <a class="page-link" asp-route-Pagina="@(Model.Pagina - 1)">Anterior</a>
+                <a class="page-link" asp-route-Pagina="@(Model.Pagina - 1)" tabindex="-1" aria-disabled="@(Model.Pagina <= 1)">Anterior</a>
             </li>
             @for (int i = 1; i <= Model.TotalPaginas; i++)
             {
@@ -55,7 +55,7 @@
                 </li>
             }
             <li class="page-item @(Model.Pagina >= Model.TotalPaginas ? "disabled" : "")">
-                <a class="page-link" asp-route-Pagina="@(Model.Pagina + 1)">Siguiente</a>
+                <a class="page-link" asp-route-Pagina="@(Model.Pagina + 1)" aria-disabled="@(Model.Pagina >= Model.TotalPaginas)">Siguiente</a>
             </li>
         </ul>
     </nav>
