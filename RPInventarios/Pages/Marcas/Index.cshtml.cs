@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RPInventarios.Data;
 using RPInventarios.Models;
@@ -8,28 +9,37 @@ namespace RPInventarios.Pages.Marcas;
 public class IndexModel : PageModel
 {
     private readonly InventariosContext _context;
+    private readonly IConfiguration _configuration;
+
     // Readonly indica que la variable _context solo puede ser asignada en el constructor de la clase.
     // Después de eso no puede ser modificada en ningún otro lugar de la clase, 
     // lo que previene cambios accidentales o intencionales. Garantiza la inmutabilidad de la referencia.
 
-    public IndexModel(InventariosContext context)
+    public IndexModel(InventariosContext context, IConfiguration configuration)
     {
         _context = context;
+        _configuration = configuration;
     }
 
-    public IReadOnlyList<Marca> Marcas { get; set; } = default!;
-    // IReadOnlyList es una interfaz que expone una lista de solo lectura. Fuera de la lase no se pueden
-    // agregar, quitar ni modificar elementos de la colección.
-    // La propiedad tiene un set público por lo que puede ser reasignada desde detro de la clase, pero 
-    // la colección es de solo lectura para quien la consume (como la vista Razor).
-
+    public List<Marca> Marcas { get; set; } = default!;
+    [BindProperty(SupportsGet = true)]
+    public int? Pagina { get; set; }
+    public int TotalRegistros { get; set; }
+    public int TotalPaginas { get; set; }
     public async Task OnGetAsync()
     {
-        Marcas = await _context.Marcas.ToListAsync();
-    }
-    // Este método se ejecuta cuando se hace una petición GET a la página. 
-    // Recupera la lista de marcas desde la BD de forma asíncrona y le asigna a la propiedad Marcas.
-    // Aunque la propiedad es de solo lectura para la vista, dentro del modelo de página sí puede ser asignada.
-}
+        // Paginación manual usando Skip y Take con EF 
+        var registrosPorPagina = _configuration.GetValue("RegistrosPorPagina", 10);
+        var consulta = _context.Marcas.AsNoTracking();
 
-// La colección Marcas solo muestra la lista de marcas, sin permitir su modificación desde la interfaz de usuario.
+        TotalRegistros = await consulta.CountAsync();
+        var numeroPagina = Pagina ?? 1;
+        TotalPaginas = (int)Math.Ceiling((double)TotalRegistros / registrosPorPagina);
+
+        Marcas = await consulta
+            .OrderBy(m => m.Id)
+            .Skip((numeroPagina - 1) * registrosPorPagina)
+            .Take(registrosPorPagina)
+            .ToListAsync();
+    }
+}
