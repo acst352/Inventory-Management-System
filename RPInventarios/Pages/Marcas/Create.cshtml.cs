@@ -7,11 +7,11 @@ namespace RPInventarios.Pages.Marcas;
 
 public class CreateModel : PageModel
 {
-    private readonly InventariosContext _context;
+    private readonly InventariosContext _context; // Declaración de clase privada de solo lectura
 
     public CreateModel(InventariosContext context)
     {
-        _context = context;
+        _context = context; // Inicialización de la variable context 
     }
 
     public IActionResult OnGet()
