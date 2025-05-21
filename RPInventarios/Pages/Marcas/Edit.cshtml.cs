@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RPInventarios.Data;
@@ -9,10 +10,12 @@ namespace RPInventarios.Pages.Marcas;
 public class EditModel : PageModel
 {
     private readonly InventariosContext _context;
+    private readonly INotyfService _servicioNotificación;
 
-    public EditModel(InventariosContext context)
+    public EditModel(InventariosContext context, INotyfService servicioNotificación)
     {
         _context = context;
+        _servicioNotificación = servicioNotificación;
     }
 
     [BindProperty]
@@ -22,12 +25,14 @@ public class EditModel : PageModel
     {
         if (id == null)
         {
+            _servicioNotificación.Warning("El ID de la marca debe tener un valor no nulo");
             return NotFound();
         }
 
         var marca = await _context.Marcas.FirstOrDefaultAsync(m => m.Id == id);
         if (marca == null)
         {
+            _servicioNotificación.Warning($"No se encontró la marca con ID {id}");
             return NotFound();
         }
         Marca = marca;
@@ -40,6 +45,7 @@ public class EditModel : PageModel
     {
         if (!ModelState.IsValid)
         {
+            _servicioNotificación.Error($"Error al editar la marca {Marca.Nombre}");
             return Page();
         }
 
@@ -72,6 +78,7 @@ public class EditModel : PageModel
             }
         }
 
+        _servicioNotificación.Success($"Marca {Marca.Nombre} editada correctamente");
         return RedirectToPage("./Index");
     }
 

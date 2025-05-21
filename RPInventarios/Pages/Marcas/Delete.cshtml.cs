@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RPInventarios.Data;
@@ -9,10 +10,12 @@ namespace RPInventarios.Pages.Marcas;
 public class DeleteModel : PageModel
 {
     private readonly InventariosContext _context;
+    private readonly INotyfService _servicioNotificacion;
 
-    public DeleteModel(InventariosContext context)
+    public DeleteModel(InventariosContext context, INotyfService servicioNotificacion)
     {
         _context = context;
+        _servicioNotificacion = servicioNotificacion;
     }
 
     [BindProperty]
@@ -22,6 +25,7 @@ public class DeleteModel : PageModel
     {
         if (id == null)
         {
+            _servicioNotificacion.Warning("El ID de la marca debe tener un valor");
             return NotFound();
         }
 
@@ -51,7 +55,7 @@ public class DeleteModel : PageModel
             _context.Marcas.Remove(Marca);
             await _context.SaveChangesAsync();
         }
-
+        _servicioNotificacion.Success($"Marca {Marca.Nombre} eliminada correctamente");
         return RedirectToPage("./Index");
     }
 }
