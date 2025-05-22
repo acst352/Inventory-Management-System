@@ -1,34 +1,30 @@
-﻿@page
+﻿@page "{id:int?}"
 @model RPInventarios.Pages.Departamentos.CreateModel
 
-        @{
-        ViewData["Title"] = "Create";
-        }
-        
-        <h1>Create</h1>
-        
-    <h4>Departamento</h4>
-    <hr />
-    <div class="row">
+@{
+    ViewData["Title"] = "Crear Departamento";
+}
+
+<h4>@ViewData["Title"]</h4>
+<hr />
+<div class="row">
     <div class="col-md-4">
-    <form method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Departamento.Nombre" class="control-label"></label>
+                <label asp-for="Departamento.Nombre" class="control-label mb-3"></label>
                 <input asp-for="Departamento.Nombre" class="form-control" />
                 <span asp-validation-for="Departamento.Nombre" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group mt-3">
+                <partial name="Acciones/_Create" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
