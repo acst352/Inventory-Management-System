@@ -11,10 +11,6 @@ public class IndexModel : PageModel
     private readonly InventariosContext _context;
     private readonly IConfiguration _configuration;
 
-    // Readonly indica que la variable _context solo puede ser asignada en el constructor de la clase.
-    // Después de eso no puede ser modificada en ningún otro lugar de la clase, 
-    // lo que previene cambios accidentales o intencionales. Garantiza la inmutabilidad de la referencia.
-
     public IndexModel(InventariosContext context, IConfiguration configuration)
     {
         _context = context;
