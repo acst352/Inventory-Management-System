@@ -13,23 +13,23 @@
 })
 
 <!-- Tabla de marcas -->
-<table class="table tabl-hover table-bordered table-strip">
-    <thead class="bg-primary text-white">
+<table class="table table-hover">
+    <thead>
         <tr>
-            <th>
+            <th class="github-dark-gray text-white">
                 @Html.DisplayNameFor(model => model.Marcas[0].Nombre)
             </th>
-            <th class="text-center">Acciones</th>
+            <th class="text-center github-dark-gray text-white">Acciones</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Marcas)
         {
             <tr>
-                <td>
+                <td class="bg-transparent text-white">
                     @Html.DisplayFor(modelItem => item.Nombre)
                 </td>
-                <td class="text-center">
+                <td class="text-center bg-transparent text-white">
                     <partial name="Acciones/_Crud" model="item.Id" />
                 </td>
             </tr>
@@ -43,16 +43,16 @@
     <nav aria-label="Paginación">
         <ul class="pagination justify-content-center my-4">
             <li class="page-item @(Model.Pagina <= 1 ? "disabled" : "")">
-                <a class="page-link" asp-route-Pagina="@(Model.Pagina - 1)" tabindex="-1" aria-disabled="@(Model.Pagina <= 1)">Anterior</a>
+                <a class="page-link github-dark-gray text-white" asp-route-Pagina="@(Model.Pagina - 1)" tabindex="-1" aria-disabled="@(Model.Pagina <= 1)">Anterior</a>
             </li>
             @for (int i = 1; i <= Model.TotalPaginas; i++)
             {
                 <li class="page-item @(i == Model.Pagina ? "active" : "")">
-                    <a class="page-link" asp-route-Pagina="@i">@i</a>
+                    <a class="page-link github-dark-gray text-white" asp-route-Pagina="@i">@i</a>
                 </li>
             }
             <li class="page-item @(Model.Pagina >= Model.TotalPaginas ? "disabled" : "")">
-                <a class="page-link" asp-route-Pagina="@(Model.Pagina + 1)" aria-disabled="@(Model.Pagina >= Model.TotalPaginas)">Siguiente</a>
+                <a class="page-link github-dark-gray text-white" asp-route-Pagina="@(Model.Pagina + 1)" aria-disabled="@(Model.Pagina >= Model.TotalPaginas)">Siguiente</a>
             </li>
         </ul>
     </nav>
