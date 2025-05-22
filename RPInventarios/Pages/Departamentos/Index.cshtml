@@ -19,22 +19,46 @@
             <th class="github-dark-gray2 text-white">
                 @Html.DisplayNameFor(model => model.Departamentos[0].Nombre)
             </th>
-
+            <th class="text-center github-dark-gray2 text-white">Acciones</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Departamentos)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
+                <td class="github-dark-gray text-white" title="@item.Nombre">
+                    @{
+                        var nombre = item.Nombre;
+                        var nombreCorto = nombre.Length > 25 ? nombre.Substring(0, 25) + "..." : nombre;
+                    }
+                    @nombreCorto
                 </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <td class="text-end github-dark-gray text-white">
+                    <partial name="Acciones/_Crud" model="item.Id" />
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<!-- Enlaces de paginación -->
+@if (Model.TotalPaginas > 1)
+{
+    <nav aria-label="Paginación">
+        <ul class="pagination justify-content-center my-4">
+            <li class="page-item @(Model.Pagina <= 1 ? "disabled" : "")">
+                <a class="page-link github-dark-gray2 text-white" asp-route-Pagina="@(Model.Pagina - 1)" tabindex="-1" aria-disabled="@(Model.Pagina <= 1)">Anterior</a>
+            </li>
+            @for (int i = 1; i <= Model.TotalPaginas; i++)
+            {
+                var isActive = i == Model.Pagina;
+                <li class="page-item @(isActive ? "active" : "")">
+                    <a class="page-link @(isActive ? "github-dark-blue text-white border-white" : "github-dark-gray2 text-white")" asp-route-Pagina="@i">@i</a>
+                </li>
+            }
+            <li class="page-item @(Model.Pagina >= Model.TotalPaginas ? "disabled" : "")">
+                <a class="page-link github-dark-gray2 text-white" asp-route-Pagina="@(Model.Pagina + 1)" aria-disabled="@(Model.Pagina >= Model.TotalPaginas)">Siguiente</a>
+            </li>
+        </ul>
+    </nav>
+}

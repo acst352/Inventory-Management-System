@@ -29,11 +29,11 @@
                 <td class="github-dark-gray text-white" title="@item.Nombre">
                     @{
                         var nombre = item.Nombre;
-                        var nombreCorto = nombre.Length > 10 ? nombre.Substring(0, 10) + "..." : nombre;
+                        var nombreCorto = nombre.Length > 25 ? nombre.Substring(0, 25) + "..." : nombre;
                     }
                     @nombreCorto
                 </td>
-                <td class="text-center github-dark-gray text-white">
+                <td class="text-end github-dark-gray text-white">
                     <partial name="Acciones/_Crud" model="item.Id" />
                 </td>
             </tr>
