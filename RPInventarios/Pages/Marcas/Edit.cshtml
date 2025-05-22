@@ -2,30 +2,30 @@
 @model RPInventarios.Pages.Marcas.EditModel
 
 @{
-	ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar";
 }
 
 <h4>@ViewData["Title"]</h4>
 <hr />
 <div class="row">
-	<div class="col-md-4">
-		<form method="post">
-			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-			<input type="hidden" asp-for="Marca.Id" />
-			<div class="form-group">
-				<label asp-for="Marca.Nombre" class="control-label mb-3"></label>
-				<input asp-for="Marca.Nombre" class="form-control" />
-				<span asp-validation-for="Marca.Nombre" class="text-danger"></span>
-			</div>
-			<div class="form-group mt-3">
-				<partial name="Acciones/_Edit" />
-			</div>
-		</form>
-	</div>
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Marca.Id" />
+            <div class="form-group">
+                <label asp-for="Marca.Nombre" class="control-label mb-3"></label>
+                <input asp-for="Marca.Nombre" class="form-control" />
+                <span asp-validation-for="Marca.Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <partial name="Acciones/_Edit" />
+            </div>
+        </form>
+    </div>
 </div>
 
 @section Scripts {
-	@{
-		await Html.RenderPartialAsync("_ValidationScriptsPartial");
-	}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
