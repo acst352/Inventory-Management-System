@@ -43,16 +43,17 @@
     <nav aria-label="Paginación">
         <ul class="pagination justify-content-center my-4">
             <li class="page-item @(Model.Pagina <= 1 ? "disabled" : "")">
-                <a class="page-link github-dark-gray text-white" asp-route-Pagina="@(Model.Pagina - 1)" tabindex="-1" aria-disabled="@(Model.Pagina <= 1)">Anterior</a>
+                <a class="page-link github-dark-gray2 text-white" asp-route-Pagina="@(Model.Pagina - 1)" tabindex="-1" aria-disabled="@(Model.Pagina <= 1)">Anterior</a>
             </li>
             @for (int i = 1; i <= Model.TotalPaginas; i++)
             {
-                <li class="page-item @(i == Model.Pagina ? "active" : "")">
-                    <a class="page-link github-dark-gray text-white" asp-route-Pagina="@i">@i</a>
+                var isActive = i == Model.Pagina;
+                <li class="page-item @(isActive ? "active" : "")">
+                    <a class="page-link @(isActive ? "github-dark-blue text-white border-white" : "github-dark-gray2 text-white")" asp-route-Pagina="@i">@i</a>
                 </li>
             }
             <li class="page-item @(Model.Pagina >= Model.TotalPaginas ? "disabled" : "")">
-                <a class="page-link github-dark-gray text-white" asp-route-Pagina="@(Model.Pagina + 1)" aria-disabled="@(Model.Pagina >= Model.TotalPaginas)">Siguiente</a>
+                <a class="page-link github-dark-gray2 text-white" asp-route-Pagina="@(Model.Pagina + 1)" aria-disabled="@(Model.Pagina >= Model.TotalPaginas)">Siguiente</a>
             </li>
         </ul>
     </nav>
