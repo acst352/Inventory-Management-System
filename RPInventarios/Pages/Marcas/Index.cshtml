@@ -13,23 +13,27 @@
 })
 
 <!-- Tabla de marcas -->
-<table class="table table-hover">
+<table class="table">
     <thead>
         <tr>
-            <th class="github-dark-gray text-white">
+            <th class="github-dark-gray2 text-white">
                 @Html.DisplayNameFor(model => model.Marcas[0].Nombre)
             </th>
-            <th class="text-center github-dark-gray text-white">Acciones</th>
+            <th class="text-center github-dark-gray2 text-white">Acciones</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Marcas)
         {
             <tr>
-                <td class="bg-transparent text-white">
-                    @Html.DisplayFor(modelItem => item.Nombre)
+                <td class="github-dark-gray text-white" title="@item.Nombre">
+                    @{
+                        var nombre = item.Nombre;
+                        var nombreCorto = nombre.Length > 20 ? nombre.Substring(0, 20) + "..." : nombre;
+                    }
+                    @nombreCorto
                 </td>
-                <td class="text-center bg-transparent text-white">
+                <td class="text-center github-dark-gray text-white">
                     <partial name="Acciones/_Crud" model="item.Id" />
                 </td>
             </tr>
