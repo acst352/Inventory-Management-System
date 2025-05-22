@@ -16,10 +16,12 @@
                 <input asp-for="TerminoBusqueda" class="form-control" placeholder="Término de búsqueda"
                        aria-label="Término de búsqueda" />
                 <button name="botonBusqueda" id="botonBusqueda" type="submit" class="btn text-white github-blue border-white">
-                    <i class="fa-solid fa-magnifying-glass"></i>&nbsp;Buscar
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span class="d-none d-sm-inline">&nbsp;Buscar</span>
                 </button>
                 <a asp-page="./Index" class="btn text-white github-dark-gray border-white">
-                    <i class="fa-solid fa-xmark"></i>&nbsp;Limpiar
+                    <i class="fa-solid fa-xmark"></i>
+                    <span class="d-none d-sm-inline">&nbsp;Limpiar</span>
                 </a>
             </div>
         </form>
