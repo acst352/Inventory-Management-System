@@ -34,6 +34,15 @@ public class CreateModel : PageModel
             return Page();
         }
 
+        /* Validar si ya existe una marca con el mismo nombre al intentar crear una marca */
+
+        var existeMarcaBd = _context.Marcas.Any(u => u.Nombre.ToLower().Trim() == Marca.Nombre.ToLower().Trim());
+        if (existeMarcaBd)
+        {
+            _servicioNotificación.Warning($"Ya existe una marca con el nombre {Marca.Nombre}");
+            return Page();
+        }
+
         _context.Marcas.Add(Marca);
         await _context.SaveChangesAsync();
         _servicioNotificación.Success($"Marca {Marca.Nombre} creada correctamente");

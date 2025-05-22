@@ -49,6 +49,14 @@ public class EditModel : PageModel
             return Page();
         }
 
+        /* Validar si ya existe una marca con el mismo nombre al intentar editar una marca */
+        var existeMarcaBd = _context.Marcas.Any(u => u.Nombre.ToLower().Trim() == Marca.Nombre.ToLower().Trim() && u.Id != Marca.Id);
+        if (existeMarcaBd)
+        {
+            _servicioNotificación.Warning($"Ya existe una marca con el nombre {Marca.Nombre}");
+            return Page();
+        }
+
         _context.Attach(Marca).State = EntityState.Modified;
 
         try
