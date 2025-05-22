@@ -29,7 +29,7 @@
                 <td class="github-dark-gray text-white" title="@item.Nombre">
                     @{
                         var nombre = item.Nombre;
-                        var nombreCorto = nombre.Length > 20 ? nombre.Substring(0, 20) + "..." : nombre;
+                        var nombreCorto = nombre.Length > 10 ? nombre.Substring(0, 10) + "..." : nombre;
                     }
                     @nombreCorto
                 </td>
