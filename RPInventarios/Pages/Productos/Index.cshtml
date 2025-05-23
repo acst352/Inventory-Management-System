@@ -2,12 +2,40 @@
 @model RPInventarios.Pages.Productos.IndexModel
 @{
     ViewData["Title"] = "Productos";
-
 }
 
 @await Html.PartialAsync("Acciones/_CrearBusqueda", new CrearBusquedaViewModel
 {
     TerminoBusqueda = Model.TerminoBusqueda,
-    TituloCrear = "Crear Marca",
+    TituloCrear = "Crear Producto",
     TotalRegistros = Model.TotalRegistros
-}) 
+})
+
+<!-- Tabla de marcas -->
+<table class="table">
+    <thead>
+        <tr>
+            <th class="github-dark-gray2 text-white">
+                @Html.DisplayNameFor(model => model.Productos[0].Nombre)
+            </th>
+            <th class="text-center github-dark-gray2 text-white">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Productos)
+        {
+            <tr>
+                <td class="github-dark-gray text-white" title="@item.Nombre">
+                    @{
+                        var nombre = item.Nombre;
+                        var nombreCorto = nombre.Length > 25 ? nombre.Substring(0, 25) + "..." : nombre;
+                    }
+                    @nombreCorto
+                </td>
+                <td class="text-end github-dark-gray text-white">
+                    <partial name="Acciones/_Crud" model="item.Id" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

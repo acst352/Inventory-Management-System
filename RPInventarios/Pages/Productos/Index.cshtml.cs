@@ -19,9 +19,13 @@ public class IndexModel : PageModel
 
     public List<Producto> Productos { get; set; } = default!;
     // Propiedades de Búsqueda
-    [BindProperty]
+    [BindProperty(SupportsGet = true)]
     public string TerminoBusqueda { get; set; }
     public int TotalRegistros { get; set; }
+    //Propiedades de Paginación
+    [BindProperty(SupportsGet = true)]
+    public int? Pagina { get; set; }
+    public int TotalPaginas { get; set; }
 
     public async Task OnGetAsync()
     {
@@ -34,5 +38,16 @@ public class IndexModel : PageModel
         }
 
         TotalRegistros = await consulta.CountAsync();
+
+        // Paginación
+        var numeroPagina = Pagina ?? 1;
+        var registrosPorPagina = _configuration.GetValue("RegistrosPorPagina", 10);
+        TotalPaginas = (int)Math.Ceiling((double)TotalRegistros / registrosPorPagina);
+
+        Productos = await consulta
+            .OrderBy(d => d.Id)
+            .Skip((numeroPagina - 1) * registrosPorPagina)
+            .Take(registrosPorPagina)
+            .ToListAsync();
     }
 }

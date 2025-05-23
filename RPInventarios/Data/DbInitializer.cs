@@ -74,9 +74,7 @@ namespace RPInventarios.Data
                     "**Scrolling:** " +
                     "**MagSpeed Electromagnetic Scrolling**—capable of scrolling **1,000 lines per second**. " +
                     "**Buttons:** **7 programmable buttons**. **Battery Life:** Up to **70 days** on a full charge. " +
-                    "**Charging:** **USB-C fast charging**. **Ergonomics:** Designed for **right-handed users**." +
-                    "**Weight:** **141 g**. **Polling Rate:** **125 Hz (8ms response time)**. **Silent Clicking:** " +
-                    "**90% quieter clicks** compared to previous models 😃",
+                    "**Charging:** **USB-C fast charging**.",
                     MarcaId = context.Marcas.First(u => u.Nombre == "Logitech").Id,
                     Costo=2000M
                 },
