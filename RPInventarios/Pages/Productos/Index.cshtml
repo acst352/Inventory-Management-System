@@ -1,0 +1,13 @@
+﻿@page "{id:int?}"
+@model RPInventarios.Pages.Productos.IndexModel
+@{
+    ViewData["Title"] = "Productos";
+
+}
+
+@await Html.PartialAsync("Acciones/_CrearBusqueda", new CrearBusquedaViewModel
+{
+    TerminoBusqueda = Model.TerminoBusqueda,
+    TituloCrear = "Crear Marca",
+    TotalRegistros = Model.TotalRegistros
+}) 
