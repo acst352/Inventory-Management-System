@@ -12,16 +12,29 @@ namespace RPInventarios.Pages.Productos
 {
     public class CreateModel : PageModel
     {
-        private readonly RPInventarios.Data.InventariosContext _context;
+        private readonly InventariosContext _context;
 
-        public CreateModel(RPInventarios.Data.InventariosContext context)
+        public CreateModel(InventariosContext context)
         {
             _context = context;
         }
 
         public IActionResult OnGet()
         {
-            ViewData["MarcaId"] = new SelectList(_context.Marcas, "Id", "Nombre");
+            ViewData["ProductoId"] = new SelectList(_context.Marcas, "Id", "Nombre");
+
+            ViewData["EstatusList"] = Enum.GetValues(typeof(RPInventarios.Models.EstatusProducto))
+                .Cast<RPInventarios.Models.EstatusProducto>()
+                .Select(e => new SelectListItem
+                {
+                    Value = ((int)e).ToString(),
+                    Text = e.GetType()
+                            .GetMember(e.ToString())[0]
+                            .GetCustomAttributes(typeof(System.ComponentModel.DataAnnotations.DisplayAttribute), false)
+                            .Cast<System.ComponentModel.DataAnnotations.DisplayAttribute>()
+                            .FirstOrDefault()?.Name ?? e.ToString()
+                }).ToList();
+
             return Page();
         }
 
