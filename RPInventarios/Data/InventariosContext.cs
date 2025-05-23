@@ -25,6 +25,11 @@ namespace RPInventarios.Data
             modelBuilder.Entity<Departamento>().ToTable("Departamento");
             modelBuilder.Entity<Producto>().ToTable("Producto");
 
+            // Especificar precisión y escala para Costo
+            modelBuilder.Entity<Producto>()
+                .Property(p => p.Costo)
+                .HasPrecision(18, 2);
+
             base.OnModelCreating(modelBuilder);
         }
     }
