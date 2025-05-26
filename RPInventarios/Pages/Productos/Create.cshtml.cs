@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RPInventarios.Data;
@@ -23,8 +19,8 @@ namespace RPInventarios.Pages.Productos
         {
             ViewData["ProductoId"] = new SelectList(_context.Marcas, "Id", "Nombre");
 
-            ViewData["EstatusList"] = Enum.GetValues(typeof(RPInventarios.Models.EstatusProducto))
-                .Cast<RPInventarios.Models.EstatusProducto>()
+            ViewData["EstatusList"] = Enum.GetValues(typeof(EstatusProducto))
+                .Cast<EstatusProducto>()
                 .Select(e => new SelectListItem
                 {
                     Value = ((int)e).ToString(),
