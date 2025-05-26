@@ -5,70 +5,69 @@ using Microsoft.EntityFrameworkCore;
 using RPInventarios.Data;
 using RPInventarios.Models;
 
-namespace RPInventarios.Pages.Productos
-{
-    public class EditModel : PageModel
-    {
-        private readonly InventariosContext _context;
+namespace RPInventarios.Pages.Productos;
 
-        public EditModel(InventariosContext context)
+public class EditModel : PageModel
+{
+    private readonly InventariosContext _context;
+
+    public EditModel(InventariosContext context)
+    {
+        _context = context;
+    }
+
+    [BindProperty]
+    public Producto Producto { get; set; } = default!;
+
+    public async Task<IActionResult> OnGetAsync(int? id)
+    {
+        if (id == null)
         {
-            _context = context;
+            return NotFound();
         }
 
-        [BindProperty]
-        public Producto Producto { get; set; } = default!;
-
-        public async Task<IActionResult> OnGetAsync(int? id)
+        var producto = await _context.Productos.FirstOrDefaultAsync(m => m.Id == id);
+        if (producto == null)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            return NotFound();
+        }
+        Producto = producto;
+        ViewData["MarcaId"] = new SelectList(_context.Marcas, "Id", "Nombre");
+        return Page();
+    }
 
-            var producto = await _context.Productos.FirstOrDefaultAsync(m => m.Id == id);
-            if (producto == null)
-            {
-                return NotFound();
-            }
-            Producto = producto;
-            ViewData["MarcaId"] = new SelectList(_context.Marcas, "Id", "Nombre");
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://aka.ms/RazorPagesCRUD.
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid)
+        {
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        _context.Attach(Producto).State = EntityState.Modified;
+
+        try
         {
-            if (!ModelState.IsValid)
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!ProductoExists(Producto.Id))
             {
-                return Page();
+                return NotFound();
             }
-
-            _context.Attach(Producto).State = EntityState.Modified;
-
-            try
+            else
             {
-                await _context.SaveChangesAsync();
+                throw;
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductoExists(Producto.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
         }
 
-        private bool ProductoExists(int id)
-        {
-            return _context.Productos.Any(e => e.Id == id);
-        }
+        return RedirectToPage("./Index");
+    }
+
+    private bool ProductoExists(int id)
+    {
+        return _context.Productos.Any(e => e.Id == id);
     }
 }
