@@ -12,19 +12,21 @@ public enum EstatusProducto
 public class Producto
 {
     public int Id { get; set; }
-    [Required(ErrorMessage = "El nombre del producto es requerido")]
-    [MinLength(5, ErrorMessage = "El nombre del producto debe tener al menos 5 caracteres")]
-    [MaxLength(50, ErrorMessage = "El nombre del producto no puede tener más de 50 caracteres")]
+
+    [Required(ErrorMessage = "El nombre del producto es obligatorio.")]
+    [MinLength(5, ErrorMessage = "El nombre del producto debe contener al menos 5 caracteres.")]
+    [MaxLength(50, ErrorMessage = "El nombre del producto no puede contener más de 50 caracteres.")]
     public string Nombre { get; set; } = string.Empty;
-    [Display(Name = "Descripcion")]
-    [StringLength(200, MinimumLength = 5, ErrorMessage = "La descripcion del producto debe tener minimo 5 caracteres y máximo 200")]
+    [Display(Name = "Descripción")]
+    [StringLength(200, MinimumLength = 5, ErrorMessage = "La descripción del producto debe contener entre 5 y 200 caracteres.")]
     public string Descripcion { get; set; } = string.Empty;
     [Display(Name = "Marca")]
-    [Required(ErrorMessage = "La marca es requerida")]
+    [Required(ErrorMessage = "La marca del producto es obligatoria.")]
     public int MarcaId { get; set; }
     public virtual Marca? Marca { get; set; }
-    [Required(ErrorMessage = "El costo es requerido")]
-    [Range(1, 9999999999, ErrorMessage = "El costo no puede ser 0 o tener más de 10 dígitos")]
+    [Required(ErrorMessage = "El costo del producto es obligatorio.")]
+    [Range(1, 9999999999, ErrorMessage = "El costo debe estar entre 1 y 9.999.999.999.")]
+    [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "El costo debe ser un número positivo, permitiendo hasta dos decimales.")]
     public decimal Costo { get; set; }
     public EstatusProducto Estatus { get; set; } = EstatusProducto.Activo;
 }
