@@ -88,3 +88,8 @@ body {
 color: #fafbfc !important;
 opacity: 1;
 }
+
+select option {
+    background-color: #000 !important;
+    color: #fafbfc !important;
+}
