@@ -17,7 +17,13 @@ namespace RPInventarios.Pages.Productos
 
         public IActionResult OnGet()
         {
-            ViewData["ProductoId"] = new SelectList(_context.Marcas, "Id", "Nombre");
+            // Obtén todas las marcas de la base de datos y crea la lista de opciones
+            ViewData["MarcaId"] = _context.Marcas
+                .Select(m => new SelectListItem
+                {
+                    Value = m.Id.ToString(),
+                    Text = m.Nombre
+                }).ToList();
 
             ViewData["EstatusList"] = Enum.GetValues(typeof(EstatusProducto))
                 .Cast<EstatusProducto>()
