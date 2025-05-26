@@ -41,6 +41,15 @@
                         asp-items="@(ViewData["EstatusList"] as IEnumerable<SelectListItem>)"></select>
                 <span asp-validation-for="Producto.Estatus" class="text-danger"></span>
             </div>
+            <div class="form-group mt-3">
+                <partial name="Acciones/_Create" />
+            </div>
         </form>
     </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
