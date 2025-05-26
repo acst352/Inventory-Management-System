@@ -25,7 +25,9 @@ public class DeleteModel : PageModel
             return NotFound();
         }
 
-        var producto = await _context.Productos.FirstOrDefaultAsync(m => m.Id == id);
+        var producto = await _context.Productos
+            .Include(p => p.Marca)
+            .FirstOrDefaultAsync(m => m.Id == id);
 
         if (producto is not null)
         {
@@ -43,8 +45,6 @@ public class DeleteModel : PageModel
         {
             return NotFound();
         }
-
-
 
         var producto = await _context.Productos.FindAsync(id);
         if (producto != null)
