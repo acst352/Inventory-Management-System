@@ -32,7 +32,7 @@
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="Producto.Costo" class="control-label"></label>
-                <input asp-for="Producto.Costo" class="form-control" />
+                <input asp-for="Producto.Costo" class="form-control" maxlength="10" inputmode="numeric" />
                 <span asp-validation-for="Producto.Costo" class="text-danger"></span>
             </div>
             <div class="form-group">
