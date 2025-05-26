@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,9 +9,9 @@ namespace RPInventarios.Pages.Productos
 {
     public class EditModel : PageModel
     {
-        private readonly RPInventarios.Data.InventariosContext _context;
+        private readonly InventariosContext _context;
 
-        public EditModel(RPInventarios.Data.InventariosContext context)
+        public EditModel(InventariosContext context)
         {
             _context = context;
         }
@@ -30,13 +26,13 @@ namespace RPInventarios.Pages.Productos
                 return NotFound();
             }
 
-            var producto =  await _context.Productos.FirstOrDefaultAsync(m => m.Id == id);
+            var producto = await _context.Productos.FirstOrDefaultAsync(m => m.Id == id);
             if (producto == null)
             {
                 return NotFound();
             }
             Producto = producto;
-           ViewData["MarcaId"] = new SelectList(_context.Marcas, "Id", "Nombre");
+            ViewData["MarcaId"] = new SelectList(_context.Marcas, "Id", "Nombre");
             return Page();
         }
 
