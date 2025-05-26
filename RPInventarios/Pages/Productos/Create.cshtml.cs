@@ -25,6 +25,7 @@ namespace RPInventarios.Pages.Productos
                     Text = m.Nombre
                 }).ToList();
 
+            // Obten los estados del producto
             ViewData["EstatusList"] = Enum.GetValues(typeof(EstatusProducto))
                 .Cast<EstatusProducto>()
                 .Select(e => new SelectListItem
