@@ -13,27 +13,27 @@
 })
 
 <!-- Tabla de departamentos -->
-<table class="table">
+<table class="table table-bordered">
     <thead>
         <tr>
-            <th class="github-dark-gray2 text-white">
+            <th class="github-dark-gray2 text-white text-center">
                 @Html.DisplayNameFor(model => model.Departamentos[0].Nombre)
             </th>
-            <th class="text-center github-dark-gray2 text-white">Acciones</th>
+            <th class="github-dark-gray2 text-white text-center">Acciones</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Departamentos)
         {
             <tr>
-                <td class="github-dark-gray text-white" title="@item.Nombre">
+                <td class="github-dark-gray text-white align-content-center text-center" title="@item.Nombre">
                     @{
                         var nombre = item.Nombre;
                         var nombreCorto = nombre.Length > 25 ? nombre.Substring(0, 25) + "..." : nombre;
                     }
                     @nombreCorto
                 </td>
-                <td class="text-end github-dark-gray text-white">
+                <td class="github-dark-gray text-white text-end">
                     <partial name="Acciones/_Crud" model="item.Id" />
                 </td>
             </tr>

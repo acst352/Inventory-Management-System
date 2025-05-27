@@ -43,11 +43,9 @@ body {
 /* Paleta de colores de Github */
 .github-dark-gray {
     background-color: #181c24 !important;
-    border-block-color: #9c9d9d !important;
 }
 .github-dark-gray2 {
     background-color: #212830 !important;
-    border-block-color: #9c9d9d !important;
 }
 .github-dark1 {
     background-color: #08040c !important;
@@ -88,4 +86,9 @@ opacity: 1;
 select option {
     background-color: #000 !important;
     color: #fafbfc !important;
+}
+
+/* Color de bordes de tabla */
+.table-bordered, .table-bordered th, .table-bordered td {
+    border: 1px solid #9c9d9d !important;
 }

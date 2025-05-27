@@ -13,13 +13,13 @@
 })
 
 <!-- Tabla de marcas -->
-<table class="table table-borderless">
+<table class="table table-bordered">
     <thead>
         <tr>
-            <th class=" github-dark-gray2 text-white text-center">
+            <th class="github-dark-gray2 text-white text-center">
                 @Html.DisplayNameFor(model => model.Marcas[0].Nombre)
             </th>
-            <th class="github-dark-gray2 text-white text-center ">Acciones</th>
+            <th class="github-dark-gray2 text-white text-center">Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -33,7 +33,7 @@
                     }
                     @nombreCorto
                 </td>
-                <td class="text-end github-dark-gray text-white">
+                <td class="github-dark-gray text-white text-end">
                     <partial name="Acciones/_Crud" model="item.Id" />
                 </td>
             </tr>
