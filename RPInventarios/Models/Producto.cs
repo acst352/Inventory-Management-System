@@ -14,11 +14,11 @@ public class Producto
     public int Id { get; set; }
 
     [Required(ErrorMessage = "El nombre del producto es obligatorio.")]
-    [MinLength(5, ErrorMessage = "El nombre del producto debe contener al menos 5 caracteres.")]
+    [MinLength(1, ErrorMessage = "El nombre del producto debe contener al menos 1 caracter.")]
     [MaxLength(50, ErrorMessage = "El nombre del producto no puede contener más de 50 caracteres.")]
     public string Nombre { get; set; } = string.Empty;
     [Display(Name = "Descripción")]
-    [StringLength(200, MinimumLength = 5, ErrorMessage = "La descripción del producto debe contener entre 5 y 200 caracteres.")]
+    [StringLength(200, MinimumLength = 5, ErrorMessage = "La descripción del producto debe contener entre 1 y 200 caracteres.")]
     public string Descripcion { get; set; } = string.Empty;
     [Display(Name = "Marca")]
     [Required(ErrorMessage = "La marca del producto es obligatoria.")]
