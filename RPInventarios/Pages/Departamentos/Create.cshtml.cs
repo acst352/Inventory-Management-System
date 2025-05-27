@@ -1,44 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using RPInventarios.Data;
 using RPInventarios.Models;
 
-namespace RPInventarios.Pages.Departamentos
+namespace RPInventarios.Pages.Departamentos;
+
+public class CreateModel : PageModel
 {
-    public class CreateModel : PageModel
+    private readonly InventariosContext _context;
+    private readonly INotyfService _servicioNotificacion;
+
+    public CreateModel(InventariosContext context, INotyfService servicioNotificacion)
     {
-        private readonly RPInventarios.Data.InventariosContext _context;
+        _context = context;
+        _servicioNotificacion = servicioNotificacion;
+    }
 
-        public CreateModel(RPInventarios.Data.InventariosContext context)
-        {
-            _context = context;
-        }
+    public IActionResult OnGet()
+    {
+        return Page();
+    }
 
-        public IActionResult OnGet()
+    [BindProperty]
+    public Departamento Departamento { get; set; } = default!;
+
+    // For more information, see https://aka.ms/RazorPagesCRUD.
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid)
         {
+            _servicioNotificacion.Error($"Error al crear el departamento {Departamento.Nombre}");
             return Page();
         }
 
-        [BindProperty]
-        public Departamento Departamento { get; set; } = default!;
-
-        // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.Departamentos.Add(Departamento);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
-        }
+        _context.Departamentos.Add(Departamento);
+        await _context.SaveChangesAsync();
+        _servicioNotificacion.Success($"Departamento {Departamento.Nombre} creado correctamente");
+        return RedirectToPage("./Index");
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,10 +11,12 @@ namespace RPInventarios.Pages.Productos;
 public class EditModel : PageModel
 {
     private readonly InventariosContext _context;
+    private readonly INotyfService _servicioNotificacion;
 
-    public EditModel(InventariosContext context)
+    public EditModel(InventariosContext context, INotyfService servicioNotificacion)
     {
         _context = context;
+        _servicioNotificacion = servicioNotificacion;
     }
 
     [BindProperty]
@@ -23,12 +26,14 @@ public class EditModel : PageModel
     {
         if (id == null)
         {
+            _servicioNotificacion.Warning("El ID del producto debe tener un valor no nulo");
             return NotFound();
         }
 
         var producto = await _context.Productos.FirstOrDefaultAsync(m => m.Id == id);
         if (producto == null)
         {
+            _servicioNotificacion.Warning($"No se encontró el producto con ID {id}");
             return NotFound();
         }
         Producto = producto;
@@ -56,6 +61,14 @@ public class EditModel : PageModel
     {
         if (!ModelState.IsValid)
         {
+            _servicioNotificacion.Error($"Error al editar el producto {Producto.Nombre}");
+            return Page();
+        }
+        /* Validar si ya existe un producto con el mismo nombre al intentar editar un producto */
+        var existeProductoBd = _context.Marcas.Any(u => u.Nombre.ToLower().Trim() == Producto.Nombre.ToLower().Trim() && u.Id != Producto.Id);
+        if (existeProductoBd)
+        {
+            _servicioNotificacion.Warning($"Ya existe un producto con el nombre {Producto.Nombre}");
             return Page();
         }
 
@@ -77,6 +90,7 @@ public class EditModel : PageModel
             }
         }
 
+        _servicioNotificacion.Success($"Producto {Producto.Nombre} editado correctamente");
         return RedirectToPage("./Index");
     }
 
