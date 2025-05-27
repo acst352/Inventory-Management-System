@@ -16,17 +16,17 @@
 <table class="table table-borderless table-rounded">
     <thead>
         <tr>
-            <th class="github-dark-gray2 text-white text-start">
+            <th class="github-dark-gray2 text-white text-start p-3">
                 @Html.DisplayNameFor(model => model.Marcas[0].Nombre)
             </th>
-            <th class="github-dark-gray2 text-white text-start">Acciones</th>
+            <th class="github-dark-gray2 text-white text-start p-3">Acciones</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Marcas)
         {
             <tr>
-                <td class="github-dark-gray text-white align-content-center text-start" title="@item.Nombre">
+                <td class="github-dark-gray text-white align-content-center text-start p-3" title="@item.Nombre">
                     @{
                         var nombre = item.Nombre;
                         var nombreCorto = nombre.Length > 25 ? nombre.Substring(0, 25) + "..." : nombre;
