@@ -106,3 +106,29 @@ select option {
     border-collapse: separate !important;
     border-spacing: 0;
 }
+
+/* Indicador de Status de Producto */
+.estatus-circulo {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+    .estatus-circulo.verde {
+        background: #54f204;
+    }
+
+    .estatus-circulo.rojo {
+        background: #fe3839;
+    }
+
+    .estatus-circulo.amarillo {
+        background: #fbe83a;
+    }
+
+    .estatus-circulo.gris {
+        background: #a4abb6;
+    }

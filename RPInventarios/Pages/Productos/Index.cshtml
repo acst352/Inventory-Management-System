@@ -1,4 +1,6 @@
 ﻿@page "{id:int?}"
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@using RPInventarios.Models
 @model RPInventarios.Pages.Productos.IndexModel
 
 @{
@@ -30,8 +32,17 @@
                     @{
                         var nombre = item.Nombre;
                         var nombreCorto = nombre.Length > 25 ? nombre.Substring(0, 25) + "..." : nombre;
+                        string estatusClase = item.Estatus switch
+                        {
+
+                            EstatusProducto.Activo => "estatus-circulo verde",
+                            EstatusProducto.Inactivo => "estatus-circulo rojo",
+                            EstatusProducto.EnProcesoActivacion => "estatus-circulo amarillo",
+                            _ => "estatus-circulo gris"
+                        };
                     }
                     @nombreCorto
+                    <span class="@estatusClase" title="@item.Estatus"></span>
                 </td>
                 <td class="github-dark-gray text-white text-start">
                     <partial name="Acciones/_Crud" model="item.Id" />
