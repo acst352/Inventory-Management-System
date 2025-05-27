@@ -29,7 +29,7 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
 }
-
+/* Paginación */
 .pagination .page-item.active .page-link {
     background-color: #007bff;
     border-color: #007bff;
@@ -47,31 +47,24 @@ body {
 .github-dark-gray2 {
     background-color: #212830 !important;
 }
-
 .github-dark1 {
     background-color: #08040c !important;
 }
-
 .github-dark2 {
     background-color: #0d1117 !important;
 }
-
 .github-white1 {
     background-color: #fafbfc !important;
 }
-
 .github-white2 {
     background-color: #ffffff !important;
 }
-
 .github-green {
     background-color: #2dba4e !important;
 }
-
 .github-blue {
     background-color: #0d74e7 !important;
 }
-
 .github-red {
     background-color: #b52626 !important;
 }
@@ -89,6 +82,7 @@ color: #fafbfc !important;
 opacity: 1;
 }
 
+/* Fondo del Dropdown */
 select option {
     background-color: #000 !important;
     color: #fafbfc !important;
