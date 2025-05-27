@@ -45,30 +45,38 @@ body {
     background-color: #181c24 !important;
     border-color: #9c9d9d !important;
 }
+
 .github-dark-gray2 {
     background-color: #212830 !important;
     border-color: #9c9d9d !important;
 }
+
 .github-dark1 {
     background-color: #08040c !important;
     border-color: #9c9d9d !important;
 }
+
 .github-dark2 {
     background-color: #0d1117 !important;
     border-color: #9c9d9d !important;
 }
+
 .github-white1 {
     background-color: #fafbfc !important;
 }
+
 .github-white2 {
     background-color: #ffffff !important;
 }
+
 .github-green {
     background-color: #2dba4e !important;
 }
+
 .github-blue {
     background-color: #0d74e7 !important;
 }
+
 .github-red {
     background-color: #b52626 !important;
 }
@@ -80,11 +88,11 @@ body {
     border-color: #9c9d9d !important;
 }
 
-/* Cambia el color del placeholder a blanco */
-.github-dark2 .form-control::placeholder {
-color: #fafbfc !important;
-opacity: 1;
-}
+    /* Cambia el color del placeholder a blanco */
+    .github-dark2 .form-control::placeholder {
+        color: #fafbfc !important;
+        opacity: 1;
+    }
 
 /* Fondo del Dropdown */
 select option {
