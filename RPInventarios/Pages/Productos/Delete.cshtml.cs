@@ -47,6 +47,7 @@ public class DeleteModel : PageModel
     {
         if (id == null)
         {
+            _servicioNotificacion.Warning("El ID del producto debe tener un valor");
             return NotFound();
         }
 
@@ -56,8 +57,13 @@ public class DeleteModel : PageModel
             Producto = producto;
             _context.Productos.Remove(Producto);
             await _context.SaveChangesAsync();
+            _servicioNotificacion.Success($"Producto {Producto.Nombre} eliminado correctamente");
         }
-        _servicioNotificacion.Success($"Producto {Producto.Nombre} eliminado correctamente");
+        else
+        {
+            _servicioNotificacion.Warning($"No se encontró el producto con ID {id}");
+        }
+
         return RedirectToPage("./Index");
     }
 }
