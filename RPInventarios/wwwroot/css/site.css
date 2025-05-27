@@ -43,15 +43,19 @@ body {
 /* Paleta de colores de Github */
 .github-dark-gray {
     background-color: #181c24 !important;
+    border-color: #9c9d9d !important;
 }
 .github-dark-gray2 {
     background-color: #212830 !important;
+    border-color: #9c9d9d !important;
 }
 .github-dark1 {
     background-color: #08040c !important;
+    border-color: #9c9d9d !important;
 }
 .github-dark2 {
     background-color: #0d1117 !important;
+    border-color: #9c9d9d !important;
 }
 .github-white1 {
     background-color: #fafbfc !important;
@@ -91,4 +95,11 @@ select option {
 /* Color de bordes de tabla */
 .table-bordered, .table-bordered th, .table-bordered td {
     border: 1px solid #9c9d9d !important;
+}
+
+.table-rounded {
+    border-radius: 16px !important;
+    overflow: hidden;
+    border-collapse: separate !important;
+    border-spacing: 0;
 }
