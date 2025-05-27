@@ -43,9 +43,11 @@ body {
 /* Paleta de colores de Github */
 .github-dark-gray {
     background-color: #181c24 !important;
+    border-block-color: #9c9d9d !important;
 }
 .github-dark-gray2 {
     background-color: #212830 !important;
+    border-block-color: #9c9d9d !important;
 }
 .github-dark1 {
     background-color: #08040c !important;
