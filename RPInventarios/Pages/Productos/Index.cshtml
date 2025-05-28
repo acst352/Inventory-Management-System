@@ -28,8 +28,13 @@
     <thead>
         <tr>
             <th class="github-dark-gray2 text-white text-start p-3">
-                <a asp-route-Orden="Id" asp-route-Direccion="@nuevaDireccion" class="text-white text-decoration-none" style="cursor:pointer;">
-                    ID @flecha
+                <a asp-route-Orden="Id"
+                   asp-route-Direccion="@(ordenActual == "Id" && direccionActual == "asc" ? "desc" : "asc")"
+                   asp-route-Pagina="@Model.Pagina"
+                   asp-route-TerminoBusqueda="@Model.TerminoBusqueda"
+                   class="text-white text-decoration-none"
+                   style="cursor:pointer;">
+                    ID @(ordenActual == "Id" ? (direccionActual == "asc" ? " ▲" : " ▼") : "")
                 </a>
             </th>
             <th class="github-dark-gray2 text-white text-start p-3">
