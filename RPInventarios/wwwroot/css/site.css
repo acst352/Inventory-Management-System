@@ -110,8 +110,8 @@ select option {
 /* Indicador de Status de Producto */
 .estatus-circulo {
     display: inline-block;
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     margin-left: 8px;
     vertical-align: middle;
