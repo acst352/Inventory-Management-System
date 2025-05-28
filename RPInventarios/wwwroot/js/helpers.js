@@ -9,6 +9,6 @@ function soloNumeros(inputSelector) {
 }
 // Shorten too long strings
 function nombreCorto(nombre) {
-    if (typeof nombre !== 'string') return "";
-    return nombre.Length > 25 ? nombre.Substring(0, 25) + "..." : nombre;
+    if (typeof nombre !== "string") return "";
+    return nombre.length > 25 ? nombre.substring(0, 25) + "..." : nombre;
 }
