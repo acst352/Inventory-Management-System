@@ -10,12 +10,12 @@ namespace RPInventarios.Pages.Marcas;
 public class EditModel : PageModel
 {
     private readonly InventariosContext _context;
-    private readonly INotyfService _servicioNotificación;
+    private readonly INotyfService _servicioNotificacion;
 
-    public EditModel(InventariosContext context, INotyfService servicioNotificación)
+    public EditModel(InventariosContext context, INotyfService servicioNotificacion)
     {
         _context = context;
-        _servicioNotificación = servicioNotificación;
+        _servicioNotificacion = servicioNotificacion;
     }
 
     [BindProperty]
@@ -25,14 +25,14 @@ public class EditModel : PageModel
     {
         if (id == null)
         {
-            _servicioNotificación.Warning("El ID de la marca debe tener un valor no nulo");
+            _servicioNotificacion.Warning("El ID de la marca debe tener un valor no nulo");
             return NotFound();
         }
 
         var marca = await _context.Marcas.FirstOrDefaultAsync(m => m.Id == id);
         if (marca == null)
         {
-            _servicioNotificación.Warning($"No se encontró la marca con ID {id}");
+            _servicioNotificacion.Warning($"No se encontró la marca con ID {id}");
             return NotFound();
         }
         Marca = marca;
@@ -45,7 +45,7 @@ public class EditModel : PageModel
     {
         if (!ModelState.IsValid)
         {
-            _servicioNotificación.Error($"Error al editar la marca {Marca.Nombre}");
+            _servicioNotificacion.Error($"Error al editar la marca {Marca.Nombre}");
             return Page();
         }
 
@@ -53,7 +53,7 @@ public class EditModel : PageModel
         var existeMarcaBd = _context.Marcas.Any(u => u.Nombre.ToLower().Trim() == Marca.Nombre.ToLower().Trim() && u.Id != Marca.Id);
         if (existeMarcaBd)
         {
-            _servicioNotificación.Warning($"Ya existe una marca con el nombre {Marca.Nombre}");
+            _servicioNotificacion.Warning($"Ya existe una marca con el nombre {Marca.Nombre}");
             return Page();
         }
 
@@ -86,7 +86,7 @@ public class EditModel : PageModel
             }
         }
 
-        _servicioNotificación.Success($"Marca {Marca.Nombre} editada correctamente");
+        _servicioNotificacion.Success($"Marca {Marca.Nombre} editada correctamente");
         return RedirectToPage("./Index");
     }
 

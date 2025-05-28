@@ -9,12 +9,12 @@ namespace RPInventarios.Pages.Marcas;
 public class CreateModel : PageModel
 {
     private readonly InventariosContext _context; // Declaración de clase privada de solo lectura
-    private readonly INotyfService _servicioNotificación;
+    private readonly INotyfService _servicioNotificacion;
 
-    public CreateModel(InventariosContext context, INotyfService servicioNotificación)
+    public CreateModel(InventariosContext context, INotyfService servicioNotificacion)
     {
         _context = context; // Inicialización de la variable context 
-        _servicioNotificación = servicioNotificación; // Inicialización de la variable servicioNotificación
+        _servicioNotificacion = servicioNotificacion; // Inicialización de la variable servicioNotificacion
     }
 
     public IActionResult OnGet()
@@ -30,7 +30,7 @@ public class CreateModel : PageModel
     {
         if (!ModelState.IsValid)
         {
-            _servicioNotificación.Error($"Error al crear la marca {Marca.Nombre}");
+            _servicioNotificacion.Error($"Error al crear la marca {Marca.Nombre}");
             return Page();
         }
 
@@ -39,13 +39,13 @@ public class CreateModel : PageModel
         var existeMarcaBd = _context.Marcas.Any(u => u.Nombre.ToLower().Trim() == Marca.Nombre.ToLower().Trim());
         if (existeMarcaBd)
         {
-            _servicioNotificación.Warning($"Ya existe una marca con el nombre {Marca.Nombre}");
+            _servicioNotificacion.Warning($"Ya existe una marca con el nombre {Marca.Nombre}");
             return Page();
         }
 
         _context.Marcas.Add(Marca);
         await _context.SaveChangesAsync();
-        _servicioNotificación.Success($"Marca {Marca.Nombre} creada correctamente");
+        _servicioNotificacion.Success($"Marca {Marca.Nombre} creada correctamente");
         return RedirectToPage("./Index");
     }
 }
