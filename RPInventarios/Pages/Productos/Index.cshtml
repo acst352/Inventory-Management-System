@@ -55,7 +55,8 @@
                 </td>
                 <td class="github-dark-gray text-white align-content-center text-start p-3" title="@item.Nombre">
                     <div class="d-flex align-items-center" style="gap: 0.5rem;">
-                        <span class="text-truncate" style="max-width: 75%;">
+                        <span class="text-truncate" style="max-width: 75%;"
+                              data-bs-toggle="tooltip" data-bs-placement="top" title="@item.Descripcion">
                             @item.Nombre
                         </span>
                         @{
@@ -99,3 +100,12 @@
         </ul>
     </nav>
 }
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+            new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+</script>
