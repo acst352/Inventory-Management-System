@@ -50,15 +50,10 @@
 </div>
 
 @section Scripts {
+    <script src="~/js/helpers.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var costoInput = document.querySelector('input[name="Producto.Costo"]');
-            if (costoInput) {
-                costoInput.addEventListener('input', function (e) {
-                    // Solo permite números, elimina cualquier letra al escribir
-                    this.value = this.value.replace(/[^0-9]/g, '');
-                });
-            }
+            soloNumeros('input[name="Producto.Costo"]');
         });
     </script>
     @{
