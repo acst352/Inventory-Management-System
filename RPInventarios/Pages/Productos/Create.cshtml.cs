@@ -18,6 +18,27 @@ public class CreateModel : PageModel
         _servicioNotificacion = servicioNotificacion;
     }
 
+    // Cargar las listas de marcas y estatus del producto para el formulario cuando hay errores de validación
+    private void CargarListas()
+    {
+        ViewData["MarcaId"] = _context.Marcas.Select(m => new SelectListItem
+        {
+            Value = m.Id.ToString(),
+            Text = m.Nombre
+        }).ToList();
+
+        ViewData["EstatusList"] = Enum.GetValues(typeof(EstatusProducto))
+            .Cast<EstatusProducto>().Select(e => new SelectListItem
+            {
+                Value = ((int)e).ToString(),
+                Text = e.GetType()
+                        .GetMember(e.ToString())[0]
+                        .GetCustomAttributes(typeof(System.ComponentModel.DataAnnotations.DisplayAttribute), false)
+                        .Cast<System.ComponentModel.DataAnnotations.DisplayAttribute>()
+                        .FirstOrDefault()?.Name ?? e.ToString()
+            }).ToList();
+    }
+
     public IActionResult OnGet()
     {
         // Obtén todas las marcas de la base de datos y crea la lista de opciones
@@ -41,6 +62,7 @@ public class CreateModel : PageModel
                         .FirstOrDefault()?.Name ?? e.ToString()
             }).ToList();
 
+        CargarListas();
         return Page();
     }
 
@@ -52,6 +74,7 @@ public class CreateModel : PageModel
     {
         if (!ModelState.IsValid)
         {
+            CargarListas();
             _servicioNotificacion.Error($"Error al crear el producto {Producto.Nombre}");
             return Page();
         }
@@ -60,6 +83,7 @@ public class CreateModel : PageModel
         var existeProductoBd = _context.Productos.Any(u => u.Nombre.ToLower().Trim() == Producto.Nombre.ToLower().Trim());
         if (existeProductoBd)
         {
+            CargarListas();
             _servicioNotificacion.Warning($"Ya existe un producto con el nombre {Producto.Nombre}");
             return Page();
         }
