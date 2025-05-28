@@ -54,22 +54,19 @@
                     @item.Id
                 </td>
                 <td class="github-dark-gray text-white align-content-center text-start p-3" title="@item.Nombre">
+                    <span class="d-inline-block text-truncate" style="max-width: 75%;">
+                        @item.Nombre
+                    </span>
                     @{
-                        // Acortar nombres demasaido largos
-                        var nombre = item.Nombre;
-                        var nombreCorto = nombre.Length > 25 ? nombre.Substring(0, 25) + "..." : nombre;
-                        
                         //  Indicador de status del producto
                         string estatusClase = item.Estatus switch
                         {
-
                             EstatusProducto.Activo => "estatus-circulo verde",
                             EstatusProducto.Inactivo => "estatus-circulo rojo",
                             EstatusProducto.EnProcesoActivacion => "estatus-circulo amarillo",
                             _ => "estatus-circulo gris"
                         };
                     }
-                    @nombreCorto
                     <span class="@estatusClase" title="@item.Estatus"></span>
                 </td>
                 <td class="github-dark-gray text-white text-start">
