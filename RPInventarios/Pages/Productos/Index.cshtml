@@ -5,6 +5,15 @@
 
 @{
     ViewData["Title"] = "Productos";
+    // Determina la dirección de orden actual y la siguiente
+    var ordenActual = Model.Orden ?? "Id";
+    var direccionActual = Model.Direccion ?? "asc";
+    var nuevaDireccion = (ordenActual == "Id" && direccionActual == "asc") ? "desc" : "asc";
+    string flecha = "";
+    if (ordenActual == "Id")
+    {
+        flecha = direccionActual == "asc" ? " ▲" : " ▼";
+    }
 }
 
 @await Html.PartialAsync("Acciones/_CrearBusqueda", new CrearBusquedaViewModel
@@ -19,7 +28,9 @@
     <thead>
         <tr>
             <th class="github-dark-gray2 text-white text-start p-3">
-                ID
+                <a asp-route-Orden="Id" asp-route-Direccion="@nuevaDireccion" class="text-white text-decoration-none" style="cursor:pointer;">
+                    ID @flecha
+                </a>
             </th>
             <th class="github-dark-gray2 text-white text-start p-3">
                 @Html.DisplayNameFor(model => model.Productos[0].Nombre)

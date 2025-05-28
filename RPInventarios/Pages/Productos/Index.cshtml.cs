@@ -1,3 +1,4 @@
+#nullable enable
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -20,12 +21,15 @@ public class IndexModel : PageModel
     public List<Producto> Productos { get; set; } = default!;
     // Propiedades de Búsqueda
     [BindProperty(SupportsGet = true)]
-    public string TerminoBusqueda { get; set; }
+    public string? TerminoBusqueda { get; set; }
     public int TotalRegistros { get; set; }
     //Propiedades de Paginación
     [BindProperty(SupportsGet = true)]
     public int? Pagina { get; set; }
     public int TotalPaginas { get; set; }
+    // Propiedades de Ordenamiento por ID
+    public string? Orden { get; set; }
+    public string? Direccion { get; set; }
 
     public async Task OnGetAsync()
     {
