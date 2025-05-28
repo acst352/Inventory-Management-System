@@ -7,8 +7,3 @@ function soloNumeros(inputSelector) {
         });
     }
 }
-// Shorten too long strings
-function nombreCorto(nombre) {
-    if (typeof nombre !== "string") return "";
-    return nombre.length > 25 ? nombre.substring(0, 25) + "..." : nombre;
-}
