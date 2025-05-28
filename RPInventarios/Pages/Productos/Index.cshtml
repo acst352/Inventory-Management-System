@@ -19,15 +19,23 @@
     <thead>
         <tr>
             <th class="github-dark-gray2 text-white text-start p-3">
+                ID
+            </th>
+            <th class="github-dark-gray2 text-white text-start p-3">
                 @Html.DisplayNameFor(model => model.Productos[0].Nombre)
             </th>
-            <th class="github-dark-gray2 text-white text-start p-3">Acciones</th>
+            <th class="github-dark-gray2 text-white text-start p-3">
+                Acciones
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Productos)
         {
             <tr>
+                <td class="github-dark-gray text-white align-content-center text-start p-3">
+                    @item.Id
+                </td>
                 <td class="github-dark-gray text-white align-content-center text-start p-3" title="@item.Nombre">
                     @{
                         var nombre = item.Nombre;
