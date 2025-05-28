@@ -56,6 +56,14 @@ public class CreateModel : PageModel
             return Page();
         }
 
+        /* Validar si ya existe un producto con el mismo nombre al intentar crear un producto */
+        var existeProductoBd = _context.Productos.Any(u => u.Nombre.ToLower().Trim() == Producto.Nombre.ToLower().Trim());
+        if (existeProductoBd)
+        {
+            _servicioNotificacion.Warning($"Ya existe un producto con el nombre {Producto.Nombre}");
+            return Page();
+        }
+
         _context.Productos.Add(Producto);
         await _context.SaveChangesAsync();
         _servicioNotificacion.Success($"Producto {Producto.Nombre} creado correctamente");
