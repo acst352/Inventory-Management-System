@@ -45,7 +45,7 @@ public class IndexModel : PageModel
 
         TotalRegistros = await consulta.CountAsync();
 
-        // Ordenamiento por ID
+        // Ordenamiento dinámico por ID
         string orden = Orden ?? "Id";
         string direccion = Direccion ?? "asc";
         consulta = (orden, direccion) switch
@@ -62,7 +62,6 @@ public class IndexModel : PageModel
         TotalPaginas = (int)Math.Ceiling((double)TotalRegistros / registrosPorPagina);
 
         Productos = await consulta
-            .OrderBy(d => d.Id)
             .Skip((numeroPagina - 1) * registrosPorPagina)
             .Take(registrosPorPagina)
             .ToListAsync();
