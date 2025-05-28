@@ -5,7 +5,7 @@
 
 @{
     ViewData["Title"] = "Productos";
-    // Determina la dirección de orden actual y la siguiente
+    // Lógica de botón para Sortear IDs por orden Ascendente o Descendente
     var ordenActual = Model.Orden ?? "Id";
     var direccionActual = Model.Direccion ?? "asc";
     var nuevaDireccion = (ordenActual == "Id" && direccionActual == "asc") ? "desc" : "asc";
@@ -28,6 +28,7 @@
     <thead>
         <tr>
             <th class="github-dark-gray2 text-white text-start p-3">
+                <!-- Botón para Sortear IDs por orden Ascendente o Descendente -->
                 <a asp-route-Orden="Id"
                    asp-route-Direccion="@(ordenActual == "Id" && direccionActual == "asc" ? "desc" : "asc")"
                    asp-route-Pagina="@Model.Pagina"
@@ -54,8 +55,11 @@
                 </td>
                 <td class="github-dark-gray text-white align-content-center text-start p-3" title="@item.Nombre">
                     @{
+                        // Acortar nombres demasaido largos
                         var nombre = item.Nombre;
                         var nombreCorto = nombre.Length > 25 ? nombre.Substring(0, 25) + "..." : nombre;
+                        
+                        //  Indicador de status del producto
                         string estatusClase = item.Estatus switch
                         {
 
