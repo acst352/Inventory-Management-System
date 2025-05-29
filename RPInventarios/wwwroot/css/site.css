@@ -132,3 +132,39 @@ select option {
     .estatus-circulo.gris {
         background: #a4abb6;
     }
+
+.col-id {
+    width: 20%;
+    min-width: 60px;
+}
+
+.col-nombre {
+    width: 50%;
+    min-width: 120px;
+}
+
+.col-acciones {
+    width: 30%;
+    min-width: 80px;
+}
+
+/* Fijar ancho fijo de columnas y evitar reajustes */
+.table-fixed {
+    table-layout: fixed;
+    width: 100%;
+}
+
+/* Desktop: ajustar anchos para mejor visualización */
+@media (min-width: 768px) {
+    .col-id {
+        width: 10%;
+    }
+
+    .col-nombre {
+        width: 60%;
+    }
+
+    .col-acciones {
+        width: 30%;
+    }
+}
