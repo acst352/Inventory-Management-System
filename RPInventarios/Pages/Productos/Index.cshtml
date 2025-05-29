@@ -39,7 +39,16 @@
                 </a>
             </th>
             <th class="github-dark-gray2 text-white text-start p-3">
-                @Html.DisplayNameFor(model => model.Productos[0].Nombre)
+                @* @Html.DisplayNameFor(model => model.Productos[0].Nombre) *@
+                <!-- Botón para Sortear Nombres por orden Alfabético -->
+                <a asp-route-Orden="Nombre"
+                   asp-route-Direccion="@(ordenActual == "Nombre" && direccionActual == "asc" ? "desc" : "asc")"
+                   asp-route-Pagina="@Model.Pagina"
+                   asp-route-TerminoBusqueda="@Model.TerminoBusqueda"
+                   class="text-white text-decoration-none"
+                   style="cursor:pointer;">
+                    Nombre@(ordenActual == "Nombre" ? (direccionActual == "asc" ? " ▲" : " ▼") : "")
+                </a>
             </th>
             <th class="github-dark-gray2 text-white text-start p-3">
                 Acciones

@@ -27,7 +27,7 @@ public class IndexModel : PageModel
     [BindProperty(SupportsGet = true)]
     public int? Pagina { get; set; }
     public int TotalPaginas { get; set; }
-    // Propiedades de Ordenamiento por ID
+    // Propiedades de Ordenamiento por ID y Nombre
     [BindProperty(SupportsGet = true)]
     public string? Orden { get; set; }
     [BindProperty(SupportsGet = true)]
@@ -45,7 +45,7 @@ public class IndexModel : PageModel
 
         TotalRegistros = await consulta.CountAsync();
 
-        // Ordenamiento dinámico por ID
+        // Ordenamiento dinámico por ID y Nombre
         string orden = Orden ?? "Id";
         string direccion = Direccion ?? "asc";
         consulta = (orden, direccion) switch
