@@ -13,33 +13,42 @@
 })
 
 <!-- Tabla de departamentos -->
-<table class="table table-borderless table-rounded">
-    <thead>
-        <tr>
-            <th class="github-dark-gray2 text-white text-start p-3">
-                @Html.DisplayNameFor(model => model.Departamentos[0].Nombre)
-            </th>
-            <th class="github-dark-gray2 text-white text-start p-3">Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Departamentos)
-        {
+<div class="table-responsive">
+    <table class="table table-borderless table-rounded table-fixed">
+        <thead>
             <tr>
-                <td class="github-dark-gray text-white align-content-center text-start p-3" title="@item.Nombre">
-                    @{
-                        var nombre = item.Nombre;
-                        var nombreCorto = nombre.Length > 25 ? nombre.Substring(0, 25) + "..." : nombre;
-                    }
-                    @nombreCorto
-                </td>
-                <td class="github-dark-gray text-white text-start">
-                    <partial name="Acciones/_Crud" model="item.Id" />
-                </td>
+                <th class="github-dark-gray2 text-white text-start p-3 col-id">
+                    Nombre del Departamento
+                </th>
+                <th class="github-dark-gray2 text-white text-start p-3 col-acciones">
+                    Acciones
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Departamentos)
+            {
+                <tr>
+                    <td class="github-dark-gray text-white align-content-center text-start p-3"
+                        title="@item.Nombre">
+                        <div class="d-flex align-items-center" style="gap: 0.5rem;">
+                            <span class="text-truncate"
+                                  style="max-width: 75%;"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-placement="top"
+                                  title="@item.Nombre">
+                                @item.Nombre
+                            </span>
+                        </div>
+                    </td>
+                    <td class="github-dark-gray text-white">
+                        <partial name="Acciones/_Crud" model="item.Id" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 <!-- Enlaces de paginación -->
 @if (Model.TotalPaginas > 1)
