@@ -27,6 +27,7 @@ public class CreateModel : PageModel
             Text = m.Nombre
         }).ToList();
 
+        // Estatus del producto
         ViewData["EstatusList"] = Enum.GetValues(typeof(EstatusProducto))
             .Cast<EstatusProducto>().Select(e => new SelectListItem
             {
