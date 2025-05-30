@@ -46,7 +46,7 @@ public class IndexModel : PageModel
 
         // Ordenamiento dinámico por ID y Nombre
         string orden = Orden ?? "Id";
-        string direccion = Direccion ?? "asc";
+        string direccion = Direccion ?? "desc";
         consulta = (orden, direccion) switch
         {
             ("Nombre", "asc") => consulta.OrderBy(p => p.Nombre),
