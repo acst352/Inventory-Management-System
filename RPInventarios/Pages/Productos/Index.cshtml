@@ -7,7 +7,7 @@
     ViewData["Title"] = "Productos";
     // Lógica de botón para Sortear IDs por orden Ascendente o Descendente
     var ordenActual = Model.Orden ?? "Id";
-    var direccionActual = Model.Direccion ?? "asc";
+    var direccionActual = Model.Direccion ?? "desc";
 }
 
 @await Html.PartialAsync("Acciones/_CrearBusqueda", new CrearBusquedaViewModel
@@ -25,12 +25,12 @@
                 <th class="github-dark-gray2 text-white text-center align-content-center p-3 col-id">
                     <!-- Botón para Sortear IDs por orden Ascendente o Descendente -->
                     <a asp-route-Orden="Id"
-                       asp-route-Direccion="@(ordenActual == "Id" && direccionActual == "asc" ? "desc" : "asc")"
+                       asp-route-Direccion="@(ordenActual == "Id" && direccionActual == "desc" ? "asc" : "desc")"
                        asp-route-Pagina="@Model.Pagina"
                        asp-route-TerminoBusqueda="@Model.TerminoBusqueda"
                        class="text-white text-decoration-none"
                        style="cursor:pointer;">
-                        ID @(ordenActual == "Id" ? (direccionActual == "asc" ? " ▲" : " ▼") : "")
+                        ID @(ordenActual == "Id" ? (direccionActual == "desc" ? "▼" : "▲") : "")
                     </a>
                 </th>
                 <th class="github-dark-gray2 text-white text-center align-content-center col-nombre">
