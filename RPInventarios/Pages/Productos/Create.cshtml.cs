@@ -42,27 +42,8 @@ public class CreateModel : PageModel
 
     public IActionResult OnGet()
     {
-        // Obtén todas las marcas de la base de datos y crea la lista de opciones
-        ViewData["MarcaId"] = _context.Marcas
-            .Select(m => new SelectListItem
-            {
-                Value = m.Id.ToString(),
-                Text = m.Nombre
-            }).ToList();
 
-        // Obten los estados del producto
-        ViewData["EstatusList"] = Enum.GetValues(typeof(EstatusProducto))
-            .Cast<EstatusProducto>()
-            .Select(e => new SelectListItem
-            {
-                Value = ((int)e).ToString(),
-                Text = e.GetType()
-                        .GetMember(e.ToString())[0]
-                        .GetCustomAttributes(typeof(System.ComponentModel.DataAnnotations.DisplayAttribute), false)
-                        .Cast<System.ComponentModel.DataAnnotations.DisplayAttribute>()
-                        .FirstOrDefault()?.Name ?? e.ToString()
-            }).ToList();
-
+        Producto = new Producto();
         CargarListas();
         return Page();
     }

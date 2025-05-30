@@ -19,7 +19,7 @@ public class Producto
     [MaxLength(50, ErrorMessage = "El nombre del producto no puede contener más de 50 caracteres.")]
     public string Nombre { get; set; } = string.Empty;
     [Display(Name = "Descripción")]
-    [StringLength(200, MinimumLength = 5, ErrorMessage = "La descripción del producto debe contener entre 1 y 200 caracteres.")]
+    [StringLength(200, MinimumLength = 5, ErrorMessage = "La descripción del producto debe contener entre 5 y 200 caracteres.")]
     public string Descripcion { get; set; } = string.Empty;
     [Display(Name = "Marca")]
     [Required(ErrorMessage = "La marca del producto es obligatoria.")]
@@ -29,5 +29,6 @@ public class Producto
     [Range(1, 9999999999, ErrorMessage = "El costo debe estar entre 1 y 9.999.999.999.")]
     [RegularExpression(@"^\d{1,10}(\.\d{1,2})?$", ErrorMessage = "El costo debe ser un número positivo, permitiendo hasta dos decimales y sin letras.")]
     public decimal Costo { get; set; }
-    public EstatusProducto Estatus { get; set; } = EstatusProducto.Activo;
+    //public EstatusProducto Estatus { get; set; } = EstatusProducto.Activo;
+    public EstatusProducto Estatus { get; set; } = EstatusProducto.Inactivo;
 }
