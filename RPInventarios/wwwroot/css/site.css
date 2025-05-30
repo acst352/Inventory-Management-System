@@ -134,24 +134,15 @@ select option {
     }
 
 .col-id {
-    width: 20%;
-    min-width: 60px;
+    width: 10%;
 }
 
 .col-nombre {
-    width: 50%;
-    min-width: 120px;
+    width: 10%;
 }
 
 .col-acciones {
-    width: 30%;
-    min-width: 80px;
-}
-
-/* Fijar ancho fijo de columnas y evitar reajustes */
-.table-fixed {
-    table-layout: fixed;
-    width: 100%;
+    width: 10%;
 }
 
 /* Desktop: ajustar anchos para mejor visualización */

@@ -25,10 +25,10 @@
 
 <!-- Tabla de marcas -->
 <div class="table-responsive">
-    <table class="table table-borderless table-rounded table-fixed">
+    <table class="table table-borderless table-rounded">
         <thead>
             <tr>
-                <th class="github-dark-gray2 text-white text-start p-3 col-id">
+                <th class="github-dark-gray2 text-white text-center align-content-center p-3 col-id">
                     <!-- Botón para Sortear IDs por orden Ascendente o Descendente -->
                     <a asp-route-Orden="Id"
                        asp-route-Direccion="@(ordenActual == "Id" && direccionActual == "asc" ? "desc" : "asc")"
@@ -39,7 +39,7 @@
                         ID @(ordenActual == "Id" ? (direccionActual == "asc" ? " ▲" : " ▼") : "")
                     </a>
                 </th>
-                <th class="github-dark-gray2 text-white text-start p-3 col-nombre">
+                <th class="github-dark-gray2 text-white text-center align-content-center col-nombre">
                     <!-- Botón para Sortear Nombres por orden Alfabético -->
                     <a asp-route-Orden="Nombre"
                        asp-route-Direccion="@(ordenActual == "Nombre" && direccionActual == "asc" ? "desc" : "asc")"
@@ -47,10 +47,10 @@
                        asp-route-TerminoBusqueda="@Model.TerminoBusqueda"
                        class="text-white text-decoration-none"
                        style="cursor:pointer;">
-                        Nombre del Producto@(ordenActual == "Nombre" ? (direccionActual == "asc" ? " ▲" : " ▼") : "")
+                        Producto@(ordenActual == "Nombre" ? (direccionActual == "asc" ? " ▲" : " ▼") : "")
                     </a>
                 </th>
-                <th class="github-dark-gray2 text-white text-start p-3 col-acciones">
+                <th class="github-dark-gray2 text-white text-center align-content-center col-acciones">
                     Acciones
                 </th>
             </tr>
@@ -59,14 +59,14 @@
             @foreach (var item in Model.Productos)
             {
                 <tr>
-                    <td class="github-dark-gray text-white align-content-center text-start p-3">
+                    <td class="github-dark-gray text-white text-center align-content-center col-id">
                         @item.Id
                     </td>
-                    <td class="github-dark-gray text-white align-content-center text-start p-3"
+                    <td class="github-dark-gray text-white text-center align-content-center col-nombre"
                         title="@item.Nombre">
-                        <div class="d-flex align-items-center" style="gap: 0.5rem;">
+                        <div class="d-md-flex align-items-center" style="gap: 0.5rem;">
                             <span class="text-truncate"
-                                  style="max-width: 75%;"
+                                  style="max-width: 50%;"
                                   data-bs-toggle="tooltip"
                                   data-bs-placement="top"
                                   title="@item.Descripcion">
@@ -84,8 +84,10 @@
                             <span class="@estatusClase" title="@item.Estatus"></span>
                         </div>
                     </td>
-                    <td class="github-dark-gray text-white">
-                        <partial name="Acciones/_Crud" model="item.Id" />
+                    <td class="github-dark-gray text-white text-center align-content-center col-acciones">
+                        <div class="text-end text-lg-center">
+                            <partial name="Acciones/_Crud" model="item.Id" />
+                        </div>
                     </td>
                 </tr>
             }
