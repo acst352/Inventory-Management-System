@@ -6,12 +6,6 @@
     // Lógica de botón para Sortear IDs por orden Ascendente o Descendente
     var ordenActual = Model.Orden ?? "Id";
     var direccionActual = Model.Direccion ?? "asc";
-    var nuevaDireccion = (ordenActual == "Id" && direccionActual == "asc") ? "desc" : "asc";
-    string flecha = "";
-    if (ordenActual == "Id")
-    {
-        flecha = direccionActual == "asc" ? " ▲" : " ▼";
-    }
 }
 
 @await Html.PartialAsync("Acciones/_CrearBusqueda", new CrearBusquedaViewModel
