@@ -36,7 +36,8 @@
             @Html.DisplayNameFor(model => model.Producto.Costo)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Producto.Costo)
+            @* @Html.DisplayFor(model => model.Producto.Costo) *@
+            @String.Format("{0:c}", Model.Producto.Costo)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Producto.Estatus)
