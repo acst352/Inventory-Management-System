@@ -8,12 +8,6 @@
     // Lógica de botón para Sortear IDs por orden Ascendente o Descendente
     var ordenActual = Model.Orden ?? "Id";
     var direccionActual = Model.Direccion ?? "asc";
-    var nuevaDireccion = (ordenActual == "Id" && direccionActual == "asc") ? "desc" : "asc";
-    string flecha = "";
-    if (ordenActual == "Id")
-    {
-        flecha = direccionActual == "asc" ? " ▲" : " ▼";
-    }
 }
 
 @await Html.PartialAsync("Acciones/_CrearBusqueda", new CrearBusquedaViewModel
@@ -64,9 +58,9 @@
                     </td>
                     <td class="github-dark-gray text-white text-center align-content-center col-nombre"
                         title="@item.Nombre">
-                        <div class="d-md-flex align-items-center" style="gap: 0.5rem;">
+                        <div class="d-flex align-items-center" style="gap: 0.5rem;">
                             <span class="text-truncate"
-                                  style="max-width: 50%;"
+                                  style="max-width: 75%;"
                                   data-bs-toggle="tooltip"
                                   data-bs-placement="top"
                                   title="@item.Descripcion">

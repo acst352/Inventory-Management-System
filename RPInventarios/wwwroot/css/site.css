@@ -138,11 +138,11 @@ select option {
 }
 
 .col-nombre {
-    width: 10%;
+    width: 60%;
 }
 
 .col-acciones {
-    width: 10%;
+    width: 30%;
 }
 
 /* Desktop: ajustar anchos para mejor visualización */
