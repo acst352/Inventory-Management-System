@@ -26,6 +26,11 @@ public class IndexModel : PageModel
     [BindProperty(SupportsGet = true)]
     public int? Pagina { get; set; }
     public int TotalPaginas { get; set; }
+    // Propiedades de Ordenamiento por ID y Nombre
+    [BindProperty(SupportsGet = true)]
+    public string? Orden { get; set; }
+    [BindProperty(SupportsGet = true)]
+    public string? Direccion { get; set; }
 
     public async Task OnGetAsync()
     {
@@ -39,13 +44,23 @@ public class IndexModel : PageModel
 
         TotalRegistros = await consulta.CountAsync();
 
+        // Ordenamiento dinámico por ID y Nombre
+        string orden = Orden ?? "Id";
+        string direccion = Direccion ?? "asc";
+        consulta = (orden, direccion) switch
+        {
+            ("Nombre", "asc") => consulta.OrderBy(p => p.Nombre),
+            ("Nombre", "desc") => consulta.OrderByDescending(p => p.Nombre),
+            ("Id", "desc") => consulta.OrderByDescending(p => p.Id),
+            _ => consulta.OrderBy(p => p.Id)
+        };
+
         // Paginación
         var numeroPagina = Pagina ?? 1;
         var registrosPorPagina = _configuration.GetValue("RegistrosPorPagina", 10);
         TotalPaginas = (int)Math.Ceiling((double)TotalRegistros / registrosPorPagina);
 
         Departamentos = await consulta
-            .OrderBy(d => d.Id)
             .Skip((numeroPagina - 1) * registrosPorPagina)
             .Take(registrosPorPagina)
             .ToListAsync();
