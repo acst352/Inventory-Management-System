@@ -29,8 +29,8 @@
                        asp-route-Pagina="@Model.Pagina"
                        asp-route-TerminoBusqueda="@Model.TerminoBusqueda"
                        class="text-white text-decoration-none"
-                       style="cursor:pointer;">
-                        ID @(ordenActual == "Id" ? (direccionActual == "desc" ? "▼" : "▲") : "")
+                       style="cursor:pointer; white-space: nowrap">
+                        ID @(ordenActual == "Id" ? (direccionActual == "desc" ? " ▼" : " ▲") : "")
                     </a>
                 </th>
                 <th class="github-dark-gray2 text-white text-center align-content-center col-nombre">
