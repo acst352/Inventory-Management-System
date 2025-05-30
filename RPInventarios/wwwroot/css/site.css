@@ -133,6 +133,11 @@ select option {
         background: #a4abb6;
     }
 
+.table-fixed {
+    table-layout: fixed;
+    width: 100%;
+}
+/* Desktop */
 .col-id {
     width: 10%;
 }
@@ -145,17 +150,37 @@ select option {
     width: 30%;
 }
 
-/* Desktop: ajustar anchos para mejor visualización */
-@media (min-width: 768px) {
+/* Mobile */
+@media (max-width: 535px) {
     .col-id {
-        width: 10%;
+        width: 15% !important;
     }
 
     .col-nombre {
-        width: 60%;
+        width: 55% !important;
     }
 
     .col-acciones {
-        width: 30%;
+        width: 30% !important;
     }
+}
+
+@media (max-width: 535px) {
+    .col-id {
+        width: 15% !important;
+    }
+
+    .col-nombre {
+        width: 55% !important;
+    }
+
+    .col-acciones {
+        width: 30% !important;
+    }
+}
+
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

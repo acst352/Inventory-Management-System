@@ -19,7 +19,7 @@
 
 <!-- Tabla de marcas -->
 <div class="table-responsive">
-    <table class="table table-borderless table-rounded">
+    <table class="table table-borderless table-rounded table-fixed">
         <thead>
             <tr>
                 <th class="github-dark-gray2 text-white text-center align-content-center p-3 col-id">
@@ -79,9 +79,7 @@
                         </div>
                     </td>
                     <td class="github-dark-gray text-white text-center align-content-center col-acciones">
-                        <div class="text-end text-lg-center">
-                            <partial name="Acciones/_Crud" model="item.Id" />
-                        </div>
+                        <partial name="Acciones/_Crud" model="item.Id" />
                     </td>
                 </tr>
             }
