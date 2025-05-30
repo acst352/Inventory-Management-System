@@ -26,7 +26,7 @@
     <table class="table table-borderless table-rounded table-fixed">
         <thead>
             <tr>
-                <th class="github-dark-gray2 text-white text-start p-3 col-nombre">
+                <th class="github-dark-gray2 text-white text-center align-content-center p-3 col-nombre">
                     <!-- Botón para Sortear Nombres por orden Alfabético -->
                     <a asp-route-Orden="Nombre"
                        asp-route-Direccion="@(ordenActual == "Nombre" && direccionActual == "asc" ? "desc" : "asc")"
@@ -37,7 +37,7 @@
                         Nombre de Marca@(ordenActual == "Nombre" ? (direccionActual == "asc" ? " ▲" : " ▼") : "")
                     </a>
                 </th>
-                <th class="github-dark-gray2 text-white text-start p-3 col-acciones">
+                <th class="github-dark-gray2 text-white text-center align-content-center col-acciones">
                     Acciones
                 </th>
             </tr>
@@ -46,7 +46,7 @@
             @foreach (var item in Model.Marcas)
             {
                 <tr>
-                    <td class="github-dark-gray text-white align-content-center text-start p-3"
+                    <td class="github-dark-gray text-white text-center align-content-center col-nombre"
                         title="@item.Nombre">
                         <div class="d-flex align-items-center" style="gap: 0.5rem;">
                             <span class="text-truncate"
@@ -55,7 +55,7 @@
                             </span>
                         </div>
                     </td>
-                    <td class="github-dark-gray text-white">
+                    <td class="github-dark-gray text-white text-center align-content-center col-acciones">
                         <partial name="Acciones/_Crud" model="item.Id" />
                     </td>
                 </tr>
