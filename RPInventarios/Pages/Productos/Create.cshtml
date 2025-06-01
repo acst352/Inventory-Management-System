@@ -25,7 +25,7 @@
             <div class="form-group mt-3">
                 <span class="text-danger">*</span>
                 <label asp-for="Producto.MarcaId" class="control-label"></label>
-                <select asp-for="Producto.MarcaId" class="form-control"
+                <select asp-for="Producto.MarcaId" class="form-select"
                         asp-items="ViewBag.MarcaId"></select>
             </div>
             <div class="form-group mt-3">
@@ -36,7 +36,7 @@
             </div>
             <div class="form-group mt-3">
                 <label asp-for="Producto.Estatus" class="control-label"></label>
-                <select asp-for="Producto.Estatus" class="form-control"
+                <select asp-for="Producto.Estatus" class="form-select"
                         asp-items="@(ViewData["EstatusList"] as IEnumerable<SelectListItem>)">
                 </select>
                 <span asp-validation-for="Producto.Estatus" class="text-danger"></span>

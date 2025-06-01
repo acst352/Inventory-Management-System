@@ -100,6 +100,12 @@ select option {
     color: #fafbfc !important;
 }
 
+.form-select {
+    background-color: transparent !important;
+    color: #fafbfc !important;
+    border-color: #9c9d9d !important;
+}
+
 .table-rounded {
     border-radius: 16px !important;
     overflow: hidden;
