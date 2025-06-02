@@ -92,50 +92,21 @@ namespace RPInventarios.Migrations
                     b.ToTable("Producto", (string)null);
                 });
 
-            modelBuilder.Entity("RPInventarios.Models.Usuario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Apellido")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Correo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Usuario");
-                });
-
             modelBuilder.Entity("RPInventarios.Models.Producto", b =>
-                {
-                    b.HasOne("RPInventarios.Models.Marca", "Marca")
-                        .WithMany("Productos")
-                        .HasForeignKey("MarcaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            {
+                b.HasOne("RPInventarios.Models.Marca", "Marca")
+                    .WithMany("Productos")
+                    .HasForeignKey("MarcaId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.Navigation("Marca");
-                });
+                b.Navigation("Marca");
+            });
 
             modelBuilder.Entity("RPInventarios.Models.Marca", b =>
-                {
-                    b.Navigation("Productos");
-                });
+            {
+                b.Navigation("Productos");
+            });
 #pragma warning restore 612, 618
         }
     }
