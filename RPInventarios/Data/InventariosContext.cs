@@ -28,5 +28,6 @@ namespace RPInventarios.Data
 
             base.OnModelCreating(modelBuilder);
         }
+        public DbSet<RPInventarios.Models.Usuario> Usuario { get; set; }
     }
 }

@@ -71,10 +71,7 @@ namespace RPInventarios.Data
                     Nombre="Logitech Mx Master 3s",
                     Descripcion="Logitech Mx Master 3s **Sensor:** 8,000 DPI optical sensor with tracking on glass. " +
                     "**Connectivity:** Wireless via Bluetooth or **Logi Bolt USB receiver**. " +
-                    "**Scrolling:** " +
-                    "**MagSpeed Electromagnetic Scrolling**—capable of scrolling **1,000 lines per second**. " +
-                    "**Buttons:** **7 programmable buttons**. **Battery Life:** Up to **70 days** on a full charge. " +
-                    "**Charging:** **USB-C fast charging**.",
+                    "**Scrolling:** ",
                     MarcaId = context.Marcas.First(u => u.Nombre == "Logitech").Id,
                     Costo=2000M
                 },
