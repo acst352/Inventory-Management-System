@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace RPInventarios.Models;
-public class Usuario
+public class Usuarios
 {
     public int Id { get; set; }
     [Required(ErrorMessage = "El nombre del usuario es obligatorio.")]

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using RPInventarios.Data;
-using RPInventarios.Models;
 
-namespace RPInventarios.Pages.Usuario
+namespace RPInventarios.Pages.Usuarios
 {
     public class DeleteModel : PageModel
     {
@@ -20,7 +14,7 @@ namespace RPInventarios.Pages.Usuario
         }
 
         [BindProperty]
-        public RPInventarios.Models.Usuario Usuario { get; set; } = default!;
+        public RPInventarios.Models.Usuarios Usuario { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
