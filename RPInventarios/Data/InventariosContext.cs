@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RPInventarios.Migrations;
 using RPInventarios.Models;
 
 namespace RPInventarios.Data
@@ -28,6 +29,6 @@ namespace RPInventarios.Data
 
             base.OnModelCreating(modelBuilder);
         }
-        public DbSet<RPInventarios.Models.Usuarios> Usuario { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; } = default!;
     }
 }

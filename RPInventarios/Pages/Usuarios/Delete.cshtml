@@ -8,9 +8,8 @@
 <h1>Delete</h1>
 
 <h3>Are you sure you want to delete this?</h3>
+<hr />
 <div>
-    <h4>Usuario</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Usuario.Nombre)
@@ -37,10 +36,9 @@
             @Html.DisplayFor(model => model.Usuario.Telefono)
         </dd>
     </dl>
-    
+
     <form method="post">
         <input type="hidden" asp-for="Usuario.Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <partial name="Acciones/_Delete" />
     </form>
 </div>

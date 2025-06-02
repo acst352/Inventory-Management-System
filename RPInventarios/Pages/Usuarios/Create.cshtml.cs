@@ -23,7 +23,7 @@ public class CreateModel : PageModel
     }
 
     [BindProperty]
-    public Usuarios Usuario { get; set; } = default!; // Cambiar el tipo a 'Usuarios'  
+    public Usuario Usuarios { get; set; } = default!; // Cambiar el tipo a 'Usuarios'  
 
     // For more information, see https://aka.ms/RazorPagesCRUD.  
     public async Task<IActionResult> OnPostAsync()
@@ -33,7 +33,7 @@ public class CreateModel : PageModel
             return Page();
         }
 
-        _context.Usuario.Add(Usuario);
+        _context.Usuarios.Add(Usuario);
         await _context.SaveChangesAsync();
 
         return RedirectToPage("./Index");

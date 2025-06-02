@@ -5,7 +5,7 @@
 namespace RPInventarios.Migrations
 {
     /// <inheritdoc />
-    public partial class Usuario : Migration
+    public partial class Usuarios : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

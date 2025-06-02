@@ -16,11 +16,11 @@ namespace RPInventarios.Pages.Usuarios
             _configuration = configuration;
         }
 
-        public IList<Usuario> Usuarios { get; set; } = default!;
+        public List<Usuario> Usuarios { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            Usuarios = (IList<Usuario>)await _context.Usuario.ToListAsync();
+            Usuarios = await _context.Usuario.ToListAsync();
         }
     }
 }

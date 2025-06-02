@@ -1,70 +1,73 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using RPInventarios.Data;
 
-namespace RPInventarios.Pages.Usuarios
+namespace RPInventarios.Pages.Usuarios;
+
+public class EditModel : PageModel
 {
-    public class EditModel : PageModel
-    {
-        private readonly RPInventarios.Data.InventariosContext _context;
+    private readonly InventariosContext _context;
+    private readonly INotyfService _servicioNotificacion;
 
-        public EditModel(RPInventarios.Data.InventariosContext context)
+    public EditModel(InventariosContext context, INotyfService servicioNotificacion)
+    {
+        _context = context;
+        _servicioNotificacion = servicioNotificacion;
+    }
+
+    [BindProperty]
+    public Usuario Usuario { get; set; } = default!;
+
+    public async Task<IActionResult> OnGetAsync(int? id)
+    {
+        if (id == null)
         {
-            _context = context;
+            return NotFound();
         }
 
-        [BindProperty]
-        public RPInventarios.Models.Usuarios Usuario { get; set; } = default!;
-
-        public async Task<IActionResult> OnGetAsync(int? id)
+        var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Id == id);
+        if (usuario == null)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            return NotFound();
+        }
+        Usuario = usuario;
+        return Page();
+    }
 
-            var usuario = await _context.Usuario.FirstOrDefaultAsync(m => m.Id == id);
-            if (usuario == null)
-            {
-                return NotFound();
-            }
-            Usuario = usuario;
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://aka.ms/RazorPagesCRUD.
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid)
+        {
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        _context.Attach(Usuario).State = EntityState.Modified;
+
+        try
         {
-            if (!ModelState.IsValid)
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!UsuarioExists(Usuario.Id))
             {
-                return Page();
+                return NotFound();
             }
-
-            _context.Attach(Usuario).State = EntityState.Modified;
-
-            try
+            else
             {
-                await _context.SaveChangesAsync();
+                throw;
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UsuarioExists(Usuario.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
         }
 
-        private bool UsuarioExists(int id)
-        {
-            return _context.Usuario.Any(e => e.Id == id);
-        }
+        return RedirectToPage("./Index");
+    }
+
+    private bool UsuarioExists(int id)
+    {
+        return _context.Usuarios.Any(e => e.Id == id);
     }
 }
