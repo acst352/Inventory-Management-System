@@ -29,6 +29,5 @@ namespace RPInventarios.Data
 
             base.OnModelCreating(modelBuilder);
         }
-        public DbSet<Usuario> Usuarios { get; set; } = default!;
     }
 }
