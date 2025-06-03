@@ -31,7 +31,9 @@ public class EditModel : PageModel
             return NotFound();
         }
 
-        var producto = await _context.Productos.FirstOrDefaultAsync(m => m.Id == id);
+        var producto = await _context.Productos
+            .AsNoTracking()
+            .FirstOrDefaultAsync(m => m.Id == id);
         if (producto == null)
         {
             _servicioNotificacion.Warning($"No se encontró el producto con ID {id}");
