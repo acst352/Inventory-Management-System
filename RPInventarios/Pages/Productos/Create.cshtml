@@ -29,8 +29,7 @@
                     <label class="input-group-text" for="inputGroupSelect01">
                         <i class="fa-solid fa-m"></i>
                     </label>
-                    <select asp-for="Producto.MarcaId"
-                            class="form-select"
+                    <select asp-for="Producto.MarcaId" class="form-select"
                             asp-items="@(ViewData["MarcaId"] as IEnumerable<SelectListItem>)">
                         <option value="">--- Seleccione una marca ---</option>
                     </select>
@@ -45,9 +44,15 @@
             </div>
             <div class="form-group mt-3">
                 <label asp-for="Producto.Estatus" class="control-label"></label>
-                <select asp-for="Producto.Estatus" class="form-select"
-                        asp-items="@(ViewData["EstatusList"] as IEnumerable<SelectListItem>)">
-                </select>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupSelect02">
+                        <i class="fa-solid fa-book-open"></i>
+                    </label>
+                    <select asp-for="Producto.Estatus" class="form-select"
+                            asp-items="@(ViewData["EstatusList"] as IEnumerable<SelectListItem>)">
+                        <option value="">--- Seleccionar Estatus ---</option>
+                    </select>
+                </div>
                 <span asp-validation-for="Producto.Estatus" class="text-danger"></span>
             </div>
             <div class="form-group mt-3">
