@@ -30,8 +30,10 @@
                     <label class="input-group-text" for="inputGroupSelect01">
                         <i class="fa-solid fa-m"></i>
                     </label>
-                    <select asp-for="Producto.MarcaId" class="form-select" asp-items="ViewBag.MarcaId">
-                        <option value="">Seleccione una marca</option>
+                    <select asp-for="Producto.MarcaId"
+                            class="form-select"
+                            asp-items="@(ViewData["MarcaId"] as IEnumerable<SelectListItem>)">
+                        <option value="">--- Seleccione una marca ---</option>
                     </select>
                 </div>
                 <span asp-validation-for="Producto.MarcaId" class="text-danger"></span>
