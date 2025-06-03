@@ -24,7 +24,9 @@ public class DetailsModel : PageModel
             return NotFound();
         }
 
-        var marca = await _context.Marcas.FirstOrDefaultAsync(m => m.Id == id);
+        var marca = await _context.Marcas
+            .AsNoTracking()
+            .FirstOrDefaultAsync(m => m.Id == id);
 
         if (marca is not null)
         {

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using RPInventarios.Data;
 using RPInventarios.Models;
 
@@ -19,13 +20,16 @@ public class CreateModel : PageModel
     }
 
     // Cargar las listas de marcas y estatus del producto para el formulario cuando hay errores de validación
+    // O la alternativa: Marcas = new SelectList(_context.Marcas.AsNoTracking(), "Id", "Nombre");
     private void CargarListas()
     {
-        ViewData["MarcaId"] = _context.Marcas.Select(m => new SelectListItem
-        {
-            Value = m.Id.ToString(),
-            Text = m.Nombre
-        }).ToList();
+        ViewData["MarcaId"] = _context.Marcas
+            .AsNoTracking()
+            .Select(m => new SelectListItem
+            {
+                Value = m.Id.ToString(),
+                Text = m.Nombre
+            }).ToList();
 
         // Estatus del producto
         ViewData["EstatusList"] = Enum.GetValues(typeof(EstatusProducto))
@@ -45,11 +49,13 @@ public class CreateModel : PageModel
 
         Producto = new Producto();
         CargarListas();
+        // Marcas = new SelectList(_context.Marcas.AsNoTracking(), "Id", "Nombre");
         return Page();
     }
 
     [BindProperty]
     public Producto Producto { get; set; } = default!;
+    // public SelectList Marcas { get; set; }
 
     // For more information, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()

@@ -26,6 +26,7 @@ public class DetailsModel : PageModel
 
         var producto = await _context.Productos
             .Include(p => p.Marca)
+            .AsNoTracking()
             .FirstOrDefaultAsync(m => m.Id == id);
 
         if (producto is not null)

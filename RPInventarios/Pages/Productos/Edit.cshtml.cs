@@ -21,6 +21,7 @@ public class EditModel : PageModel
 
     [BindProperty]
     public Producto Producto { get; set; } = default!;
+    public SelectList Marcas { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
@@ -37,7 +38,7 @@ public class EditModel : PageModel
             return NotFound();
         }
         Producto = producto;
-        ViewData["MarcaId"] = new SelectList(_context.Marcas, "Id", "Nombre");
+        ViewData["MarcaId"] = new SelectList(_context.Marcas.AsNoTracking(), "Id", "Nombre");
 
         // Obten los estados del producto
         ViewData["EstatusList"] = Enum.GetValues(typeof(EstatusProducto))
@@ -59,6 +60,7 @@ public class EditModel : PageModel
     {
         if (!ModelState.IsValid)
         {
+            Marcas = new SelectList(_context.Marcas.AsNoTracking(), "Id", "Nombre");
             _servicioNotificacion.Error($"Error al editar el producto {Producto.Nombre}");
             return Page();
         }
@@ -66,6 +68,7 @@ public class EditModel : PageModel
         var existeProductoBd = _context.Marcas.Any(u => u.Nombre.ToLower().Trim() == Producto.Nombre.ToLower().Trim() && u.Id != Producto.Id);
         if (existeProductoBd)
         {
+            Marcas = new SelectList(_context.Marcas.AsNoTracking(), "Id", "Nombre");
             _servicioNotificacion.Warning($"Ya existe un producto con el nombre {Producto.Nombre}");
             return Page();
         }
