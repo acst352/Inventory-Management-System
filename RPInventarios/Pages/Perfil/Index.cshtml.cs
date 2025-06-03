@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿#nullable enable
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RPInventarios.Data;
-using RPInventarios.Models;
 
-namespace RPInventarios.Pages.Marcas;
+namespace RPInventarios.Pages.Perfiles;
 
 public class IndexModel : PageModel
 {
@@ -17,27 +17,25 @@ public class IndexModel : PageModel
         _configuration = configuration;
     }
 
-    public List<Marca> Marcas { get; set; } = default!;
+    public List<RPInventarios.Models.Perfil> Perfiles { get; set; } = default!;
     // Propiedades de Búsqueda
     [BindProperty(SupportsGet = true)]
-    public string TerminoBusqueda { get; set; }
+    public string? TerminoBusqueda { get; set; }
     public int TotalRegistros { get; set; }
     //Propiedades de Paginación
     [BindProperty(SupportsGet = true)]
     public int? Pagina { get; set; }
     public int TotalPaginas { get; set; }
     // Propiedades de Ordenamiento por ID y Nombre
-#nullable enable
     [BindProperty(SupportsGet = true)]
     public string? Orden { get; set; }
     [BindProperty(SupportsGet = true)]
     public string? Direccion { get; set; }
-#nullable disable
 
     public async Task OnGetAsync()
     {
         // Búsqueda o Filtrado
-        var consulta = _context.Marcas.AsNoTracking();
+        var consulta = _context.Perfiles.AsNoTracking();
 
         if (!string.IsNullOrEmpty(TerminoBusqueda))
         {
@@ -62,7 +60,7 @@ public class IndexModel : PageModel
         var registrosPorPagina = _configuration.GetValue("RegistrosPorPagina", 10);
         TotalPaginas = (int)Math.Ceiling((double)TotalRegistros / registrosPorPagina);
 
-        Marcas = await consulta
+        Perfiles = await consulta
             .Skip((numeroPagina - 1) * registrosPorPagina)
             .Take(registrosPorPagina)
             .ToListAsync();

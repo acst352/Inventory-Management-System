@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RPInventarios.Data;
 
@@ -10,9 +11,11 @@ using RPInventarios.Data;
 namespace RPInventarios.Migrations
 {
     [DbContext(typeof(InventariosContext))]
-    partial class InventariosContextModelSnapshot : ModelSnapshot
+    [Migration("20250603225634_IdentidadUsuariosRoles2")]
+    partial class IdentidadUsuariosRoles2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -27,10 +27,12 @@ public class IndexModel : PageModel
     public int? Pagina { get; set; }
     public int TotalPaginas { get; set; }
     // Propiedades de Ordenamiento por ID y Nombre
+#nullable enable
     [BindProperty(SupportsGet = true)]
     public string? Orden { get; set; }
     [BindProperty(SupportsGet = true)]
     public string? Direccion { get; set; }
+#nullable disable
 
     public async Task OnGetAsync()
     {

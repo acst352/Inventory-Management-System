@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RPInventarios.Data;
 
@@ -10,9 +11,11 @@ using RPInventarios.Data;
 namespace RPInventarios.Migrations
 {
     [DbContext(typeof(InventariosContext))]
-    partial class InventariosContextModelSnapshot : ModelSnapshot
+    [Migration("20250603212545_IdentidadUsuariosRoles")]
+    partial class IdentidadUsuariosRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,24 +60,6 @@ namespace RPInventarios.Migrations
                     b.ToTable("Marca", (string)null);
                 });
 
-            modelBuilder.Entity("RPInventarios.Models.Perfil", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Perfil", (string)null);
-                });
-
             modelBuilder.Entity("RPInventarios.Models.Producto", b =>
                 {
                     b.Property<int>("Id")
@@ -110,47 +95,6 @@ namespace RPInventarios.Migrations
                     b.ToTable("Producto", (string)null);
                 });
 
-            modelBuilder.Entity("RPInventarios.Models.Usuario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Apellidos")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Celular")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Contrasena")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CorreoElectronico")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("PerfilId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PerfilId");
-
-                    b.ToTable("Usuario", (string)null);
-                });
-
             modelBuilder.Entity("RPInventarios.Models.Producto", b =>
                 {
                     b.HasOne("RPInventarios.Models.Marca", "Marca")
@@ -162,25 +106,9 @@ namespace RPInventarios.Migrations
                     b.Navigation("Marca");
                 });
 
-            modelBuilder.Entity("RPInventarios.Models.Usuario", b =>
-                {
-                    b.HasOne("RPInventarios.Models.Perfil", "Perfil")
-                        .WithMany("Usuarios")
-                        .HasForeignKey("PerfilId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Perfil");
-                });
-
             modelBuilder.Entity("RPInventarios.Models.Marca", b =>
                 {
                     b.Navigation("Productos");
-                });
-
-            modelBuilder.Entity("RPInventarios.Models.Perfil", b =>
-                {
-                    b.Navigation("Usuarios");
                 });
 #pragma warning restore 612, 618
         }

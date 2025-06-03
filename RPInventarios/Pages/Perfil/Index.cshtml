@@ -1,0 +1,97 @@
+﻿@page "{id:int?}"
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@using RPInventarios.Models
+@model RPInventarios.Pages.Perfiles.IndexModel
+
+@{
+    ViewData["Title"] = "Perfiles";
+    // Lógica de botón para Sortear IDs por orden Ascendente o Descendente
+    var ordenActual = Model.Orden ?? "Id";
+    var direccionActual = Model.Direccion ?? "desc";
+}
+
+@await Html.PartialAsync("Acciones/_CrearBusqueda", new CrearBusquedaViewModel
+{
+    TerminoBusqueda = Model.TerminoBusqueda,
+    TituloCrear = "Crear Perfil",
+    TotalRegistros = Model.TotalRegistros
+})
+
+<!-- Tabla de perfiles -->
+<div class="table-responsive">
+    <table class="table table-borderless table-rounded table-fixed">
+        <thead>
+            <tr>
+                <th class="github-dark-gray2 text-white text-center align-content-center p-3 col-id">
+                    <!-- Botón para Sortear IDs por orden Ascendente o Descendente -->
+                    <a asp-route-Orden="Id"
+                       asp-route-Direccion="@(ordenActual == "Id" && direccionActual == "desc" ? "asc" : "desc")"
+                       asp-route-Pagina="@Model.Pagina"
+                       asp-route-TerminoBusqueda="@Model.TerminoBusqueda"
+                       class="text-white text-decoration-none"
+                       style="cursor:pointer; white-space: nowrap">
+                        ID @(ordenActual == "Id" ? (direccionActual == "desc" ? " ▼" : " ▲") : "")
+                    </a>
+                </th>
+                <th class="github-dark-gray2 text-white text-center align-content-center col-nombre">
+                    <!-- Botón para Sortear Nombres por orden Alfabético -->
+                    <a asp-route-Orden="Nombre"
+                       asp-route-Direccion="@(ordenActual == "Nombre" && direccionActual == "asc" ? "desc" : "asc")"
+                       asp-route-Pagina="@Model.Pagina"
+                       asp-route-TerminoBusqueda="@Model.TerminoBusqueda"
+                       class="text-white text-decoration-none"
+                       style="cursor:pointer;">
+                        Perfil@(ordenActual == "Nombre" ? (direccionActual == "asc" ? " ▲" : " ▼") : "")
+                    </a>
+                </th>
+                <th class="github-dark-gray2 text-white text-center align-content-center col-acciones">
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Perfiles)
+            {
+                <tr>
+                    <td class="github-dark-gray text-white text-center align-content-center col-id">
+                        @item.Id
+                    </td>
+                    <td class="github-dark-gray text-white text-center align-content-center col-nombre"
+                        title="@item.Nombre">
+                        <div class="d-flex align-items-center" style="gap: 0.5rem;">
+                            <span class="text-truncate"
+                                  style="max-width: 75%;">
+                                @item.Nombre
+                            </span>
+                        </div>
+                    </td>
+                    <td class="github-dark-gray text-white text-center align-content-center col-acciones">
+                        <partial name="Acciones/_Crud" model="item.Id" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Enlaces de paginación -->
+@if (Model.TotalPaginas > 1)
+{
+    <nav aria-label="Paginación">
+        <ul class="pagination justify-content-center my-4">
+            <li class="page-item @(Model.Pagina <= 1 ? "disabled" : "")">
+                <a class="page-link github-dark-gray2 text-white" asp-route-Pagina="@(Model.Pagina - 1)" tabindex="-1" aria-disabled="@(Model.Pagina <= 1)">Anterior</a>
+            </li>
+            @for (int i = 1; i <= Model.TotalPaginas; i++)
+            {
+                var isActive = i == Model.Pagina;
+                <li class="page-item @(isActive ? "active" : "")">
+                    <a class="page-link @(isActive ? "github-dark-blue text-white border-white" : "github-dark-gray2 text-white")" asp-route-Pagina="@i">@i</a>
+                </li>
+            }
+            <li class="page-item @(Model.Pagina >= Model.TotalPaginas ? "disabled" : "")">
+                <a class="page-link github-dark-gray2 text-white" asp-route-Pagina="@(Model.Pagina + 1)" aria-disabled="@(Model.Pagina >= Model.TotalPaginas)">Siguiente</a>
+            </li>
+        </ul>
+    </nav>
+}

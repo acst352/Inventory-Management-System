@@ -14,6 +14,8 @@ namespace RPInventarios.Data
         public DbSet<Marca> Marcas { get; set; } = default!;
         public DbSet<Departamento> Departamentos { get; set; } = default!;
         public DbSet<Producto> Productos { get; set; } = default!;
+        public DbSet<Usuario> Usuarios { get; set; } = default!;
+        public DbSet<Perfil> Perfiles { get; set; } = default!;
 
         // Mapeo del nombre de clases con el nombre en la tabla de la BD
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -21,6 +23,8 @@ namespace RPInventarios.Data
             modelBuilder.Entity<Marca>().ToTable("Marca");
             modelBuilder.Entity<Departamento>().ToTable("Departamento");
             modelBuilder.Entity<Producto>().ToTable("Producto");
+            modelBuilder.Entity<Usuario>().ToTable("Usuario");
+            modelBuilder.Entity<Perfil>().ToTable("Perfil");
 
             // Especificar precisión y escala para Costo
             modelBuilder.Entity<Producto>()
