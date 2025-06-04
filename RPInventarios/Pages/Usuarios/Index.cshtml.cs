@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RPInventarios.Data;
 using RPInventarios.Models;
+using System.Reflection;
 
 namespace RPInventarios.Pages.Usuarios;
 
@@ -41,13 +42,22 @@ public class IndexModel : PageModel
 
         if (!string.IsNullOrEmpty(TerminoBusqueda))
         {
-            consulta = consulta.Where(m => m.Nombre.Contains(TerminoBusqueda)
-            || m.Apellidos.Contains(TerminoBusqueda)
-            || m.Username.Contains(TerminoBusqueda)
-            || m.CorreoElectronico.Contains(TerminoBusqueda)
-            || m.Celular.Contains(TerminoBusqueda)
-            || m.Perfil.Nombre.Contains(TerminoBusqueda)
-            || m.Id.ToString().Contains(TerminoBusqueda));
+            // Obtén todas las propiedades string del modelo Usuario
+            var stringProps = typeof(Usuario)
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p => p.PropertyType == typeof(string))
+                .ToList();
+
+            // Construye la expresión dinámica
+            consulta = consulta.Where(u =>
+                stringProps.Any(prop =>
+                    EF.Functions.Like(EF.Property<string>(u, prop.Name), $"%{TerminoBusqueda}%")
+                )
+                // Incluye búsqueda en Id
+                || u.Id.ToString().Contains(TerminoBusqueda)
+                // Incluye búsqueda en Perfil.Nombre
+                || u.Perfil.Nombre.Contains(TerminoBusqueda)
+            );
         }
 
         TotalRegistros = await consulta.CountAsync();
