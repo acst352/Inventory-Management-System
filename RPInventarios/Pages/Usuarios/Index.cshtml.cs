@@ -39,8 +39,7 @@ public class IndexModel : PageModel
             .Include(u => u.Perfil)
             .AsNoTracking();
 
-        if (!string.IsNullOrEmpty(TerminoBusqueda))
-        {
+        if (!string.IsNullOrEmpty(TerminoBusqueda)){
             consulta = consulta.Where(m => m.Nombre.Contains(TerminoBusqueda)
             || m.Apellidos.Contains(TerminoBusqueda)
             || m.Username.Contains(TerminoBusqueda)
