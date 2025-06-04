@@ -1,7 +1,6 @@
 ﻿using AspNetCoreHero.ToastNotification;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using RPInventarios.Data;
 var builder = WebApplication.CreateBuilder(args);
 
