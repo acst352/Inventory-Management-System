@@ -21,5 +21,5 @@ public class Usuario
     [Required(ErrorMessage = "El perfil del usuario es obligatorio.")]
     [Display(Name = "Perfil")]
     public int PerfilId { get; set; }
-    public Perfil Perfil { get; set; }
+    public virtual Perfil? Perfil { get; set; }
 }

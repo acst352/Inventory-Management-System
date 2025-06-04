@@ -20,28 +20,28 @@
     <table class="table table-borderless table-rounded table-fixed">
         <thead>
             <tr>
-                <th class="github-dark-gray2 text-white text-center align-content-center p-3 col-id">
+                <th class="github-dark-gray2 text-white text-center align-content-center p-3">
                     @Html.DisplayNameFor(model => model.Usuarios[0].Id)
                 </th>
-                <th class="github-dark-gray2 text-white text-center align-content-center p-3 col-nombre">
+                <th class="github-dark-gray2 text-white text-center align-content-center p-3">
                     @Html.DisplayNameFor(model => model.Usuarios[0].Nombre)
                 </th>
-                <th class="github-dark-gray2 text-white text-center align-content-center col-nombre">
+                <th class="github-dark-gray2 text-white text-center align-content-center">
                     @Html.DisplayNameFor(model => model.Usuarios[0].Apellidos)
                 </th>
-                <th>
+                <th class="github-dark-gray2 text-white text-center align-content-center">
                     @Html.DisplayNameFor(model => model.Usuarios[0].Username)
                 </th>
-                <th>
+                <th class="github-dark-gray2 text-white text-center align-content-center">
                     @Html.DisplayNameFor(model => model.Usuarios[0].Contrasena)
                 </th>
-                <th>
+                <th class="github-dark-gray2 text-white text-center align-content-center">
                     @Html.DisplayNameFor(model => model.Usuarios[0].CorreoElectronico)
                 </th>
-                <th>
+                <th class="github-dark-gray2 text-white text-center align-content-center">
                     @Html.DisplayNameFor(model => model.Usuarios[0].Celular)
                 </th>
-                <th>
+                <th class="github-dark-gray2 text-white text-center align-content-center">
                     @Html.DisplayNameFor(model => model.Usuarios[0].Perfil)
                 </th>
                 <th class="github-dark-gray2 text-white text-center align-content-center col-acciones">
@@ -59,26 +59,25 @@
                     <td class="github-dark-gray text-white text-center align-content-center col-nombre">
                         @Html.DisplayFor(modelItem => item.Nombre)
                     </td>
-                    <td>
+                    <td class="github-dark-gray text-white text-center align-content-center col-nombre">
                         @Html.DisplayFor(modelItem => item.Apellidos)
                     </td>
-                    <td>
+                    <td class="github-dark-gray text-white text-center align-content-center col-nombre">
                         @Html.DisplayFor(modelItem => item.Username)
                     </td>
-                    <td>
+                    <td class="github-dark-gray text-white text-center align-content-center col-nombre">
                         @Html.DisplayFor(modelItem => item.Contrasena)
                     </td>
-                    <td>
+                    <td class="github-dark-gray text-white text-center align-content-center col-nombre">
                         @Html.DisplayFor(modelItem => item.CorreoElectronico)
                     </td>
-                    <td>
+                    <td class="github-dark-gray text-white text-center align-content-center col-nombre">
                         @Html.DisplayFor(modelItem => item.Celular)
                     </td>
-                    <td>
+                    <td class="github-dark-gray text-white text-center align-content-center col-nombre">
                         @Html.DisplayFor(modelItem => item.Perfil.Nombre)
                     </td>
-                    <td>
-                    <td class="github-dark-gray text-white text-center align-content-center col-acciones">
+                    <td class="github-dark-gray text-white text-center align-content-center">
                         <partial name="Acciones/_Crud" model="item.Id" />
                     </td>
                 </tr>

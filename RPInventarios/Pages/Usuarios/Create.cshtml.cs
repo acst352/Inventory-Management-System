@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using RPInventarios.Data;
 using RPInventarios.Models;
 
@@ -13,6 +14,22 @@ public class CreateModel : PageModel
     public CreateModel(InventariosContext context)
     {
         _context = context;
+    }
+
+    private void CargarListas()
+    {
+
+        // Perfil de usuario
+        ViewData["PerfilList"] = Enum.GetValues(typeof(EstatusProducto))
+            .Cast<EstatusProducto>().Select(e => new SelectListItem
+            {
+                Value = ((int)e).ToString(),
+                Text = e.GetType()
+                        .GetMember(e.ToString())[0]
+                        .GetCustomAttributes(typeof(System.ComponentModel.DataAnnotations.DisplayAttribute), false)
+                        .Cast<System.ComponentModel.DataAnnotations.DisplayAttribute>()
+                        .FirstOrDefault()?.Name ?? e.ToString()
+            }).ToList();
     }
 
     public IActionResult OnGet()
