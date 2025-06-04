@@ -41,7 +41,13 @@ public class IndexModel : PageModel
 
         if (!string.IsNullOrEmpty(TerminoBusqueda))
         {
-            consulta = consulta.Where(m => m.Nombre.Contains(TerminoBusqueda));
+            consulta = consulta.Where(m => m.Nombre.Contains(TerminoBusqueda)
+            || m.Apellidos.Contains(TerminoBusqueda)
+            || m.Username.Contains(TerminoBusqueda)
+            || m.CorreoElectronico.Contains(TerminoBusqueda)
+            || m.Celular.Contains(TerminoBusqueda)
+            || m.Perfil.Nombre.Contains(TerminoBusqueda)
+            || m.Id.ToString().Contains(TerminoBusqueda));
         }
 
         TotalRegistros = await consulta.CountAsync();
