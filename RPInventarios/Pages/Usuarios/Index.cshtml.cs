@@ -17,7 +17,7 @@ public class IndexModel : PageModel
         _configuration = configuration;
     }
 
-    public List<Usuario> Usuarios { get; set; } = default!;
+    public IList<Usuario> Usuarios { get; set; } = default!;
     // Propiedades de Búsqueda
     [BindProperty(SupportsGet = true)]
     public string? TerminoBusqueda { get; set; }
