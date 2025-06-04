@@ -49,7 +49,7 @@
                 <span class="text-danger">*</span>
                 <label asp-for="Usuario.PerfilId" class="control-label"></label>
                 <select asp-for="Usuario.PerfilId" class="form-select"
-                        asp-items="@(ViewData["PerfilList"] as IEnumerable<SelectListItem>)">
+                        asp-items="@(ViewData["PerfilId"] as IEnumerable<SelectListItem>)">
                     <option value="">--- Seleccionar Perfil de usuario ---</option>
                 </select>
             </div>

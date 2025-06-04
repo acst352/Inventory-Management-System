@@ -24,7 +24,10 @@ public class DetailsModel : PageModel
             return NotFound();
         }
 
-        var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Id == id);
+        var usuario = await _context.Usuarios
+            .Include(p => p.Perfil)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(m => m.Id == id);
 
         if (usuario is not null)
         {

@@ -79,6 +79,9 @@
                     </td>
                     <td class="github-dark-gray text-white text-center align-content-center">
                         <partial name="Acciones/_Crud" model="item.Id" />
+                        <a asp-page="./CambiarContrasena" asp-route-id="@item.Id" class="btn btn-warning">
+                            <i class="fa-solid fa-key"></i>&nbsp;Contraseña
+                        </a>
                     </td>
                 </tr>
             }

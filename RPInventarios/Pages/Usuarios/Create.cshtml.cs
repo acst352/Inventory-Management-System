@@ -18,23 +18,20 @@ public class CreateModel : PageModel
 
     private void CargarListas()
     {
-
         // Perfil de usuario
-        ViewData["PerfilList"] = Enum.GetValues(typeof(EstatusProducto))
-            .Cast<EstatusProducto>().Select(e => new SelectListItem
+        ViewData["PerfilId"] = _context.Perfiles // Corrected "Perfil" to "Perfiles"
+            .AsNoTracking()
+            .Select(m => new SelectListItem
             {
-                Value = ((int)e).ToString(),
-                Text = e.GetType()
-                        .GetMember(e.ToString())[0]
-                        .GetCustomAttributes(typeof(System.ComponentModel.DataAnnotations.DisplayAttribute), false)
-                        .Cast<System.ComponentModel.DataAnnotations.DisplayAttribute>()
-                        .FirstOrDefault()?.Name ?? e.ToString()
+                Value = m.Id.ToString(),
+                Text = m.Nombre
             }).ToList();
     }
 
     public IActionResult OnGet()
     {
-        ViewData["PerfilId"] = new SelectList(_context.Perfiles, "Id", "Nombre");
+        ViewData["PerfilId"] = new SelectList(_context.Perfiles, "Id", "Nombre"); // Corrected "Perfil" to "Perfiles"
+        CargarListas();
         return Page();
     }
 
