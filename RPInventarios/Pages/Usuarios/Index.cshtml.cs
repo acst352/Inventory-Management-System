@@ -35,7 +35,9 @@ public class IndexModel : PageModel
     public async Task OnGetAsync()
     {
         // Búsqueda o Filtrado
-        var consulta = _context.Usuarios.AsNoTracking();
+        var consulta = _context.Usuarios
+            .Include(u => u.Perfil)
+            .AsNoTracking();
 
         if (!string.IsNullOrEmpty(TerminoBusqueda))
         {
