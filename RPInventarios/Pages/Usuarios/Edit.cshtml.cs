@@ -35,9 +35,6 @@ public class EditModel : PageModel
         ViewData["PerfilId"] = new SelectList(_context.Perfiles, "Id", "Nombre");
         return Page();
     }
-
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more information, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
     {
         if (!ModelState.IsValid)

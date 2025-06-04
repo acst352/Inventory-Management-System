@@ -19,7 +19,7 @@ public class CreateModel : PageModel
     private void CargarListas()
     {
         // Perfil de usuario
-        ViewData["PerfilId"] = _context.Perfiles // Corrected "Perfil" to "Perfiles"
+        ViewData["PerfilId"] = _context.Perfiles 
             .AsNoTracking()
             .Select(m => new SelectListItem
             {
@@ -30,15 +30,13 @@ public class CreateModel : PageModel
 
     public IActionResult OnGet()
     {
-        ViewData["PerfilId"] = new SelectList(_context.Perfiles, "Id", "Nombre"); // Corrected "Perfil" to "Perfiles"
+        ViewData["PerfilId"] = new SelectList(_context.Perfiles, "Id", "Nombre"); 
         CargarListas();
         return Page();
     }
 
     [BindProperty]
     public Usuario Usuario { get; set; } = default!;
-
-    // For more information, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
     {
         if (!ModelState.IsValid)
