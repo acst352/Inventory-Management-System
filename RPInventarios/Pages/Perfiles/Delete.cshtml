@@ -1,16 +1,13 @@
-﻿@page
+﻿@page "{id:int?}"
 @model RPInventarios.Pages.Perfil.DeleteModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "¿Desea eliminar el perfil con nombre " + Model.Perfil.Nombre + " ?";
 }
 
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
+<h4>@ViewData["Title"]</h4>
+<hr />
 <div>
-    <h4>Perfil</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Perfil.Nombre)
@@ -19,10 +16,9 @@
             @Html.DisplayFor(model => model.Perfil.Nombre)
         </dd>
     </dl>
-    
+
     <form method="post">
         <input type="hidden" asp-for="Perfil.Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <partial name="Acciones/_Delete" />
     </form>
 </div>
