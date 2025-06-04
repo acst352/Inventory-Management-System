@@ -6,8 +6,8 @@ public class Usuario
 {
     public int Id { get; set; }
     [Required(ErrorMessage = "El nombre del usuario es obligatorio.")]
-    [MinLength(5, ErrorMessage = "El nombre del usuario debe ser mayor o igual a 5 caracteres."),
-    MaxLength(50, ErrorMessage = "El nombre del usuario no debe exceder los 50 caracteres.")]
+    [MinLength(5, ErrorMessage = "El nombre del usuario debe ser mayor o igual a 2 caracteres."),
+    MaxLength(50, ErrorMessage = "El nombre del usuario no debe exceder los 25 caracteres.")]
     public string Nombre { get; set; }
     public string Apellidos { get; set; }
     [Required(ErrorMessage = "El nombre de la cuenta del usuario es obligatorio.")]
